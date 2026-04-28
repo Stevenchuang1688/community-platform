@@ -1,0 +1,547 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// 用户表
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String?   // 如果是OAuth登录可能为空
+  phone         String?   @unique
+  name          String
+  avatar        String?   // 头像URL
+  bio           String?   @db.Text
+  role          UserRole  @default(USER)
+  status        UserStatus @default(ACTIVE)
+  emailVerified DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // 关联
+  profile       Profile?
+  activities    Activity[]        // 发布的活动
+  registrations ActivityRegistration[] // 活动报名
+  posts         Post[]            // 发布的动态
+  comments      Comment[]         // 评论
+  skills        UserSkill[]       // 技能
+  skillExchangesSent     SkillExchange[] @relation("Requester")
+  skillExchangesReceived SkillExchange[] @relation("Provider")
+  follows       Follow[]          @relation("Follower")
+  followers     Follow[]          @relation("Following")
+  messagesSent  Message[]         @relation("Sender")
+  messagesReceived Message[]      @relation("Receiver")
+  services      Service[]         // OPC服务
+  ordersAsBuyer Order[]           @relation("Buyer")
+  ordersAsSeller Order[]          @relation("Seller")
+  likes         Like[]
+  
+  // 购物商城关联
+  products      Product[]
+  cartItems     CartItem[]
+  shopOrders    ShopOrder[]
+  
+  @@map("users")
+}
+
+model Profile {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // 个人信息
+  location    String?
+  occupation  String?
+  company     String?
+  website     String?
+  
+  // 社交链接
+  wechat      String?
+  weibo       String?
+  github      String?
+  
+  // 兴趣标签
+  interests   String[] // 存储标签ID
+  
+  // 统计数据
+  activityCount      Int @default(0) // 举办活动数
+  participationCount Int @default(0) // 参与活动数
+  followerCount      Int @default(0)
+  followingCount     Int @default(0)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("profiles")
+}
+
+// 活动表
+model Activity {
+  id          String   @id @default(cuid())
+  title       String
+  description String   @db.Text
+  coverImage  String?  // 封面图
+  
+  // 活动类型和状态
+  type        ActivityType
+  status      ActivityStatus @default(DRAFT)
+  
+  // 时间和地点
+  startTime   DateTime
+  endTime     DateTime?
+  location    String?  // 线下地点
+  onlineUrl   String?  // 线上链接
+  
+  // 报名设置
+  maxParticipants Int?    // 人数限制
+  requireApproval Boolean @default(false) // 是否需要审核
+  registrationDeadline DateTime?
+  
+  // 统计数据
+  viewCount   Int @default(0)
+  likeCount   Int @default(0)
+  
+  // 关联
+  organizerId String
+  organizer   User     @relation(fields: [organizerId], references: [id])
+  registrations ActivityRegistration[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("activities")
+}
+
+// 活动报名表
+model ActivityRegistration {
+  id          String   @id @default(cuid())
+  activityId  String
+  activity    Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  status      RegistrationStatus @default(PENDING)
+  checkedIn   Boolean @default(false)
+  checkedInAt DateTime?
+  remark      String?  // 备注/报名信息
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@unique([activityId, userId])
+  @@map("activity_registrations")
+}
+
+// 技能表
+model Skill {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  category    SkillCategory
+  icon        String?  // 图标
+  description String?
+  
+  userSkills  UserSkill[]
+  
+  createdAt   DateTime @default(now())
+  
+  @@map("skills")
+}
+
+// 用户技能关联表
+model UserSkill {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  skillId   String
+  skill     Skill     @relation(fields: [skillId], references: [id], onDelete: Cascade)
+  
+  type      UserSkillType // 我能教 / 我想学
+  level     SkillLevel?   // 熟练程度（如果是教）
+  description String?     // 详细说明
+  
+  createdAt DateTime  @default(now())
+  
+  @@unique([userId, skillId, type])
+  @@map("user_skills")
+}
+
+// 技能互换表
+model SkillExchange {
+  id          String   @id @default(cuid())
+  requesterId String   // 请求者
+  requester   User     @relation("Requester", fields: [requesterId], references: [id])
+  providerId  String   // 提供技能者
+  provider    User     @relation("Provider", fields: [providerId], references: [id])
+  
+  skillId     String
+  message     String?  // 请求留言
+  status      ExchangeStatus @default(PENDING)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("skill_exchanges")
+}
+
+// 动态/帖子表
+model Post {
+  id        String   @id @default(cuid())
+  content   String   @db.Text
+  images    String[] // 图片URL数组
+  
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  
+  comments  Comment[]
+  likes     Like[]
+  
+  viewCount Int @default(0)
+  likeCount Int @default(0)
+  commentCount Int @default(0)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@map("posts")
+}
+
+// 评论表
+model Comment {
+  id        String   @id @default(cuid())
+  content   String
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  parentId  String?  // 回复评论
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@map("comments")
+}
+
+// 点赞表
+model Like {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+  
+  @@unique([userId, postId])
+  @@map("likes")
+}
+
+// 关注表
+model Follow {
+  id          String   @id @default(cuid())
+  followerId  String
+  follower    User     @relation("Follower", fields: [followerId], references: [id], onDelete: Cascade)
+  followingId String
+  following   User     @relation("Following", fields: [followingId], references: [id], onDelete: Cascade)
+  
+  createdAt   DateTime @default(now())
+  
+  @@unique([followerId, followingId])
+  @@map("follows")
+}
+
+// 私信表
+model Message {
+  id        String   @id @default(cuid())
+  content   String   @db.Text
+  
+  senderId  String
+  sender    User     @relation("Sender", fields: [senderId], references: [id], onDelete: Cascade)
+  receiverId String
+  receiver  User     @relation("Receiver", fields: [receiverId], references: [id], onDelete: Cascade)
+  
+  read      Boolean  @default(false)
+  readAt    DateTime?
+  
+  createdAt DateTime @default(now())
+  
+  @@map("messages")
+}
+
+// OPC服务表
+model Service {
+  id          String   @id @default(cuid())
+  title       String
+  description String   @db.Text
+  coverImage  String?
+  
+  // 服务类型和价格
+  type        ServiceType
+  price       Float    // 价格
+  priceUnit   String   // 价格单位（小时/次/项目）
+  
+  // 状态
+  status      ServiceStatus @default(ACTIVE)
+  
+  // 统计数据
+  orderCount  Int @default(0)
+  rating      Float @default(5)
+  
+  providerId  String
+  provider    User     @relation(fields: [providerId], references: [id], onDelete: Cascade)
+  orders      Order[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("services")
+}
+
+// 订单表
+model Order {
+  id          String   @id @default(cuid())
+  serviceId   String
+  service     Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  
+  buyerId     String
+  buyer       User     @relation("Buyer", fields: [buyerId], references: [id])
+  sellerId    String
+  seller      User     @relation("Seller", fields: [sellerId], references: [id])
+  
+  amount      Float    // 订单金额
+  quantity    Int      @default(1)
+  totalAmount Float    // 总金额
+  
+  status      OrderStatus @default(PENDING)
+  remark      String?
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("orders")
+}
+
+// 枚举定义
+enum UserRole {
+  USER      // 普通用户
+  ORGANIZER // 主理人
+  ADMIN     // 管理员
+}
+
+enum UserStatus {
+  ACTIVE    // 正常
+  INACTIVE  // 未激活
+  SUSPENDED // 封禁
+}
+
+enum ActivityType {
+  ONLINE    // 线上活动
+  OFFLINE   // 线下活动
+  HYBRID    // 混合活动
+}
+
+enum ActivityStatus {
+  DRAFT     // 草稿
+  PUBLISHED // 已发布
+  ONGOING   // 进行中
+  ENDED     // 已结束
+  CANCELLED // 已取消
+}
+
+enum RegistrationStatus {
+  PENDING   // 待审核
+  APPROVED  // 已通过
+  REJECTED  // 已拒绝
+  CANCELLED // 已取消
+}
+
+enum SkillCategory {
+  TECH      // 技术
+  DESIGN    // 设计
+  LANGUAGE  // 语言
+  BUSINESS  // 商业
+  LIFESTYLE // 生活方式
+  ART       // 艺术
+  SPORTS    // 运动
+  OTHER     // 其他
+}
+
+enum UserSkillType {
+  TEACH     // 我能教
+  LEARN     // 我想学
+}
+
+enum SkillLevel {
+  BEGINNER     // 入门
+  INTERMEDIATE // 中级
+  ADVANCED     // 高级
+  EXPERT       // 专家
+}
+
+enum ExchangeStatus {
+  PENDING   // 待处理
+  ACCEPTED  // 已接受
+  REJECTED  // 已拒绝
+  COMPLETED // 已完成
+}
+
+enum ServiceType {
+  CONSULTATION // 咨询
+  COURSE       // 课程
+  SERVICE      // 服务
+  PRODUCT      // 产品
+}
+
+enum ServiceStatus {
+  ACTIVE    // 上架
+  INACTIVE  // 下架
+}
+
+enum OrderStatus {
+  PENDING   // 待确认
+  CONFIRMED // 已确认
+  IN_PROGRESS // 进行中
+  COMPLETED // 已完成
+  CANCELLED // 已取消
+}
+
+// ============ 购物商城 ============
+
+// 商品分类
+model ProductCategory {
+  id          String   @id @default(cuid())
+  name        String
+  icon        String?
+  sort        Int      @default(0)
+  products    Product[]
+  
+  createdAt   DateTime @default(now())
+  
+  @@map("product_categories")
+}
+
+// 商品表
+model Product {
+  id          String   @id @default(cuid())
+  title       String
+  description String   @db.Text
+  images      String[] // 图片URL数组
+  price       Float    // 售价
+  originalPrice Float? // 原价
+  stock       Int      @default(0) // 库存
+  sales       Int      @default(0) // 销量
+  
+  categoryId  String
+  category    ProductCategory @relation(fields: [categoryId], references: [id])
+  
+  sellerId    String
+  seller      User     @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  
+  status      ProductStatus @default(ACTIVE)
+  tags        String[]
+  
+  // 统计
+  viewCount   Int @default(0)
+  likeCount   Int @default(0)
+  
+  cartItems   CartItem[]
+  orderItems  OrderItem[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("products")
+}
+
+// 购物车
+model CartItem {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId   String
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  
+  quantity    Int      @default(1)
+  selected    Boolean  @default(true)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@unique([userId, productId])
+  @@map("cart_items")
+}
+
+// 商城订单
+model ShopOrder {
+  id          String   @id @default(cuid())
+  orderNo     String   @unique // 订单号
+  
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  totalAmount Float    // 商品总额
+  payAmount   Float    // 实付金额
+  discount    Float    @default(0) // 优惠金额
+  
+  // 收货信息
+  receiverName  String?
+  receiverPhone String?
+  receiverAddress String?
+  
+  status      ShopOrderStatus @default(PENDING)
+  
+  // 支付信息
+  payMethod   PayMethod?
+  paidAt      DateTime?
+  transactionId String? // 第三方支付交易号
+  
+  items       OrderItem[]
+  
+  remark      String?
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("shop_orders")
+}
+
+// 订单明细
+model OrderItem {
+  id          String   @id @default(cuid())
+  orderId     String
+  order       ShopOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId   String
+  product     Product  @relation(fields: [productId], references: [id])
+  
+  title       String   // 商品快照
+  image       String?  // 商品图片快照
+  price       Float    // 单价快照
+  quantity    Int
+  amount      Float    // 小计
+  
+  @@map("order_items")
+}
+
+enum ProductStatus {
+  ACTIVE    // 上架
+  INACTIVE  // 下架
+}
+
+enum ShopOrderStatus {
+  PENDING     // 待付款
+  PAID        // 已付款
+  SHIPPED     // 已发货
+  DELIVERED   // 已收货
+  CANCELLED   // 已取消
+  REFUNDING   // 退款中
+  REFUNDED    // 已退款
+}
+
+enum PayMethod {
+  WECHAT      // 微信支付
+  ALIPAY      // 支付宝
+  BALANCE     // 余额支付
+}

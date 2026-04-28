@@ -1,0 +1,48 @@
+{
+  "name": "community-platform",
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "outputDirectory": "./.next",
+  "nodeVersion": "22.11.0",
+  "cloudFunctions": {
+    "nodejs": {
+      "externalNodeModules": [
+        "@prisma/client",
+        "bcryptjs",
+        "jsonwebtoken"
+      ],
+      "includeFiles": [
+        "prisma/schema.prisma",
+        ".env",
+        "lib/**"
+      ],
+      "maxDuration": 60
+    },
+    "mainlandRegions": ["ap-guangzhou"],
+    "overseasRegions": ["ap-singapore"]
+  },
+  "headers": [
+    {
+      "source": "/*",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
+      ]
+    },
+    {
+      "source": "/_next/static/*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "max-age=31536000"
+        }
+      ]
+    }
+  ]
+}
