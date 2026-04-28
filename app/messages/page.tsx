@@ -59,7 +59,7 @@ const conversations = [
   {
     id: "5",
     user: { name: "烘焙师小美", avatar: "" },
-    lastMessage: "法式甜点教程已经准备好了 🎂",
+    lastMessage: "法式甜点教程已经准备好了",
     time: "2天前",
     unread: 0,
     online: false,
@@ -88,21 +88,21 @@ export default function MessagesPage() {
   const activeConversation = conversations.find((c) => c.id === selectedChat)
 
   return (
-    <div className="min-h-screen bg-gray-50/50">
-      <div className="container px-4 md:px-6 py-6">
+    <div className="min-h-screen bg-gradient-elegant">
+      <div className="container-elegant section-spacing">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-0 h-[calc(100vh-10rem)] rounded-xl overflow-hidden border bg-white shadow-sm">
           {/* 会话列表 */}
           <div className={`md:col-span-1 border-r ${showMobile ? 'hidden md:block' : ''}`}>
             <div className="p-4 border-b">
               <div className="flex items-center justify-between mb-3">
-                <h2 className="font-bold text-lg">消息</h2>
-                <Badge variant="secondary">{conversations.filter((c) => c.unread > 0).length}</Badge>
+                <h2 className="font-bold text-base text-[#333]">消息</h2>
+                <span className="tag-elegant text-[10px]">{conversations.filter((c) => c.unread > 0).length}</span>
               </div>
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#888]" />
                 <Input
                   placeholder="搜索联系人..."
-                  className="pl-10"
+                  className="pl-10 input-elegant"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
@@ -117,13 +117,13 @@ export default function MessagesPage() {
                     setSelectedChat(conv.id)
                     setShowMobile(true)
                   }}
-                  className={`w-full flex items-center gap-3 p-4 hover:bg-gray-50 transition-colors text-left ${
-                    selectedChat === conv.id ? "bg-orange-50" : ""
+                  className={`w-full flex items-center gap-3 p-4 hover:bg-[#F5F1E9]/50 transition-colors text-left ${
+                    selectedChat === conv.id ? "bg-[#F5F1E9]" : ""
                   }`}
                 >
                   <div className="relative">
                     <Avatar className="h-12 w-12">
-                      <AvatarFallback className="bg-orange-100 text-orange-700">{conv.user.name[0]}</AvatarFallback>
+                      <AvatarFallback className="bg-[#F5F1E9] text-[#2C4A46]">{conv.user.name[0]}</AvatarFallback>
                     </Avatar>
                     {conv.online && (
                       <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></div>
@@ -131,15 +131,15 @@ export default function MessagesPage() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
-                      <span className="font-medium text-sm">{conv.user.name}</span>
-                      <span className="text-xs text-muted-foreground">{conv.time}</span>
+                      <span className="font-medium text-sm text-[#333]">{conv.user.name}</span>
+                      <span className="text-xs text-[#888]">{conv.time}</span>
                     </div>
                     <div className="flex items-center justify-between mt-0.5">
-                      <p className="text-sm text-muted-foreground truncate">{conv.lastMessage}</p>
+                      <p className="text-sm text-[#888] truncate">{conv.lastMessage}</p>
                       {conv.unread > 0 && (
-                        <Badge className="ml-2 bg-red-500 text-white border-0 text-xs h-5 min-w-[1.25rem] flex items-center justify-center">
+                        <span className="ml-2 bg-[#2C4A46] text-white text-xs h-5 min-w-[1.25rem] flex items-center justify-center rounded-full px-1">
                           {conv.unread}
-                        </Badge>
+                        </span>
                       )}
                     </div>
                   </div>
@@ -159,13 +159,13 @@ export default function MessagesPage() {
                       <ArrowLeft className="h-5 w-5" />
                     </button>
                     <Avatar className="h-9 w-9">
-                      <AvatarFallback className="bg-orange-100 text-orange-700 text-sm">
+                      <AvatarFallback className="bg-[#F5F1E9] text-[#2C4A46] text-sm">
                         {activeConversation.user.name[0]}
                       </AvatarFallback>
                     </Avatar>
                     <div>
-                      <p className="font-medium text-sm">{activeConversation.user.name}</p>
-                      <p className="text-xs text-green-500">{activeConversation.online ? "在线" : "离线"}</p>
+                      <p className="font-medium text-sm text-[#333]">{activeConversation.user.name}</p>
+                      <p className="text-xs text-green-600">{activeConversation.online ? "在线" : "离线"}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-1">
@@ -192,13 +192,13 @@ export default function MessagesPage() {
                         <div
                           className={`px-4 py-2.5 rounded-2xl text-sm ${
                             msg.sender === "me"
-                              ? "bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-br-md"
-                              : "bg-gray-100 text-foreground rounded-bl-md"
+                              ? "bg-[#2C4A46] text-white rounded-br-md"
+                              : "bg-[#F5F1E9] text-[#333] rounded-bl-md"
                           }`}
                         >
                           {msg.content}
                         </div>
-                        <p className={`text-xs text-muted-foreground mt-1 ${msg.sender === "me" ? "text-right" : ""}`}>
+                        <p className={`text-xs text-[#888] mt-1 ${msg.sender === "me" ? "text-right" : ""}`}>
                           {msg.time}
                         </p>
                       </div>
@@ -222,29 +222,28 @@ export default function MessagesPage() {
                       placeholder="输入消息..."
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      className="flex-1"
+                      className="flex-1 input-elegant"
                       onKeyDown={(e) => {
                         if (e.key === "Enter" && message.trim()) {
                           setMessage("")
                         }
                       }}
                     />
-                    <Button
-                      size="icon"
-                      className="h-9 w-9 bg-gradient-to-r from-orange-500 to-red-500 shrink-0"
+                    <button
+                      className="btn-primary h-9 w-9 !px-0 shrink-0"
                       disabled={!message.trim()}
                       onClick={() => setMessage("")}
                     >
                       <Send className="h-4 w-4" />
-                    </Button>
+                    </button>
                   </div>
                 </div>
               </>
             ) : (
               <div className="flex-1 flex items-center justify-center">
                 <div className="text-center">
-                  <MessageCircle className="h-16 w-16 text-gray-200 mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold text-gray-400">选择一个会话开始聊天</h3>
+                  <MessageCircle className="h-16 w-16 text-[#2C4A46]/15 mx-auto mb-4" />
+                  <h3 className="text-lg font-semibold text-[#888]">选择一个会话开始聊天</h3>
                 </div>
               </div>
             )}

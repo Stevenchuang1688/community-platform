@@ -1,6 +1,6 @@
 "use client"
 
-import { BookOpen, Users, PlayCircle, FileText, MessageCircle } from "lucide-react"
+import { BookOpen, Users, PlayCircle, FileText } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -48,30 +48,30 @@ const studyGroups = [
 
 export default function LearnPage() {
   return (
-    <div className="min-h-screen bg-gray-50/50">
+    <div className="min-h-screen bg-gradient-elegant">
       {/* Header */}
-      <div className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white">
-        <div className="container px-4 md:px-6 py-12">
-          <h1 className="text-3xl font-bold">学习专区</h1>
-          <p className="text-blue-100 mt-1">知识分享，共同成长</p>
+      <div className="bg-[#2C4A46] text-white">
+        <div className="container-elegant py-12">
+          <h1 className="text-2xl font-bold">学习专区</h1>
+          <p className="text-[#F5F1E9]/80 mt-1 text-sm">知识分享，共同成长</p>
         </div>
       </div>
 
-      <div className="container px-4 md:px-6 py-8">
+      <div className="container-elegant section-spacing">
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
           <StatCard icon={BookOpen} label="精品课程" value="24" />
           <StatCard icon={Users} label="学习小组" value="56" />
           <StatCard icon={PlayCircle} label="视频资源" value="128" />
           <StatCard icon={FileText} label="学习资料" value="512" />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           {/* Courses */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-8">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl font-bold">精品课程</h2>
-              <Button variant="outline" size="sm">查看全部</Button>
+              <h2 className="text-xl font-bold text-[#333]">精品课程</h2>
+              <button className="btn-secondary text-xs">查看全部</button>
             </div>
             <div className="grid gap-4">
               {courses.map((course) => (
@@ -81,10 +81,10 @@ export default function LearnPage() {
           </div>
 
           {/* Study Groups */}
-          <div className="space-y-6">
+          <div className="space-y-8">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl font-bold">学习小组</h2>
-              <Button variant="outline" size="sm">全部</Button>
+              <h2 className="text-xl font-bold text-[#333]">学习小组</h2>
+              <button className="btn-secondary text-xs">全部</button>
             </div>
             <div className="space-y-4">
               {studyGroups.map((group) => (
@@ -92,18 +92,18 @@ export default function LearnPage() {
               ))}
             </div>
 
-            <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200">
-              <CardHeader>
-                <CardTitle className="text-lg">创建学习小组</CardTitle>
-                <CardDescription>发起一个学习主题，找到志同道合的伙伴</CardDescription>
+            <div className="card-elegant p-5 bg-[#F5F1E9]">
+              <CardHeader className="p-0 pb-2">
+                <CardTitle className="text-base font-semibold text-[#333]">创建学习小组</CardTitle>
+                <CardDescription className="text-sm text-[#888]">发起一个学习主题，找到志同道合的伙伴</CardDescription>
               </CardHeader>
-              <CardContent>
-                <Button className="w-full bg-blue-500 hover:bg-blue-600">
+              <CardContent className="p-0 pt-4">
+                <button className="btn-primary w-full">
                   <Users className="mr-2 h-4 w-4" />
                   创建小组
-                </Button>
+                </button>
               </CardContent>
-            </Card>
+            </div>
           </div>
         </div>
       </div>
@@ -113,72 +113,68 @@ export default function LearnPage() {
 
 function StatCard({ icon: Icon, label, value }: { icon: any, label: string, value: string }) {
   return (
-    <Card>
-      <CardContent className="p-6 flex items-center gap-4">
-        <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-          <Icon className="h-6 w-6 text-blue-600" />
-        </div>
-        <div>
-          <p className="text-2xl font-bold">{value}</p>
-          <p className="text-sm text-muted-foreground">{label}</p>
-        </div>
-      </CardContent>
-    </Card>
+    <div className="card-elegant p-6 flex items-center gap-4">
+      <div className="w-12 h-12 bg-[#F5F1E9] rounded-xl flex items-center justify-center">
+        <Icon className="h-6 w-6 text-[#2C4A46]" />
+      </div>
+      <div>
+        <p className="text-2xl font-bold text-[#333]">{value}</p>
+        <p className="text-sm text-[#888]">{label}</p>
+      </div>
+    </div>
   )
 }
 
 function CourseCard({ course }: { course: any }) {
   return (
-    <Card className="overflow-hidden hover:shadow-md transition-shadow">
+    <div className="card-elegant overflow-hidden">
       <div className="flex flex-col sm:flex-row">
-        <div className="sm:w-48 h-32 sm:h-auto bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center">
-          <PlayCircle className="h-12 w-12 text-blue-300" />
+        <div className="sm:w-48 h-32 sm:h-auto bg-[#F5F1E9] flex items-center justify-center">
+          <PlayCircle className="h-12 w-12 text-[#2C4A46]/20" />
         </div>
-        <div className="flex-1 p-4">
+        <div className="flex-1 p-5">
           <div className="flex items-start justify-between">
             <div>
-              <Badge variant="secondary" className="mb-2">{course.category}</Badge>
-              <h3 className="font-semibold text-lg">{course.title}</h3>
-              <p className="text-sm text-muted-foreground mt-1">{course.description}</p>
+              <span className="tag-elegant mb-2 inline-block">{course.category}</span>
+              <h3 className="font-semibold text-base text-[#333]">{course.title}</h3>
+              <p className="text-sm text-[#888] mt-1">{course.description}</p>
             </div>
           </div>
           <div className="flex items-center justify-between mt-4">
             <div className="flex items-center gap-2">
               <Avatar className="h-6 w-6">
                 <AvatarImage src={course.instructor.avatar} />
-                <AvatarFallback className="text-xs bg-blue-100 text-blue-700">
+                <AvatarFallback className="text-xs bg-[#F5F1E9] text-[#2C4A46]">
                   {course.instructor.name[0]}
                 </AvatarFallback>
               </Avatar>
-              <span className="text-sm text-muted-foreground">{course.instructor.name}</span>
+              <span className="text-sm text-[#888]">{course.instructor.name}</span>
             </div>
-            <div className="flex items-center gap-4 text-sm text-muted-foreground">
+            <div className="flex items-center gap-4 text-sm text-[#888]">
               <span>{course.students} 人在学</span>
               <span>{course.lessons} 节课</span>
             </div>
           </div>
         </div>
       </div>
-    </Card>
+    </div>
   )
 }
 
 function StudyGroupCard({ group }: { group: any }) {
   return (
-    <Card className="hover:shadow-md transition-shadow cursor-pointer">
-      <CardContent className="p-4">
-        <div className="flex items-start justify-between">
-          <div>
-            <Badge variant="outline" className="mb-2">{group.category}</Badge>
-            <h3 className="font-semibold">{group.name}</h3>
-            <p className="text-sm text-muted-foreground mt-1">{group.description}</p>
-          </div>
-          <div className="flex items-center gap-1 text-sm text-muted-foreground">
-            <Users className="h-4 w-4" />
-            {group.members}
-          </div>
+    <div className="card-elegant p-4 cursor-pointer">
+      <div className="flex items-start justify-between">
+        <div>
+          <span className="tag-elegant mb-2 inline-block">{group.category}</span>
+          <h3 className="font-semibold text-sm text-[#333]">{group.name}</h3>
+          <p className="text-sm text-[#888] mt-1">{group.description}</p>
         </div>
-      </CardContent>
-    </Card>
+        <div className="flex items-center gap-1 text-sm text-[#888]">
+          <Users className="h-4 w-4" />
+          {group.members}
+        </div>
+      </div>
+    </div>
   )
 }

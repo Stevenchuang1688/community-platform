@@ -3,10 +3,6 @@
 import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { Eye, EyeOff, Mail, Lock, User, ArrowRight, Phone } from "lucide-react"
 
 export default function RegisterPage() {
@@ -19,7 +15,8 @@ export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
-  const [step, setStep] = useState(1) // 1: 基本信息, 2: 完善资料
+  const [step, setStep] = useState(1)
+  const [role, setRole] = useState<"USER" | "ORGANIZER">("USER")
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -41,7 +38,7 @@ export default function RegisterPage() {
       const res = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, phone, password }),
+        body: JSON.stringify({ name, email, phone, password, role }),
       })
 
       const data = await res.json()
@@ -62,47 +59,64 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50 to-red-50 px-4 py-12">
-      <div className="w-full max-w-md">
-        {/* Logo */}
-        <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-2xl flex items-center justify-center text-white text-2xl mx-auto mb-4">
+    <div className="min-h-screen flex items-stretch bg-[#F5F1E9]">
+      {/* 左侧品牌文案 */}
+      <div className="hidden lg:flex lg:w-1/2 flex-col justify-center items-center px-12 bg-[#2C4A46]">
+        <div className="max-w-md text-center">
+          <div className="w-20 h-20 rounded-2xl flex items-center justify-center text-white text-3xl mx-auto mb-10 border border-white/20 bg-white/10">
             社
           </div>
-          <h1 className="text-2xl font-bold">创建账号</h1>
-          <p className="text-muted-foreground mt-1">加入社群主理人平台</p>
+          <h2 className="text-3xl font-bold text-white mb-4 tracking-wide">
+            谦懋乐享
+          </h2>
+          <p className="text-xl text-white/80 mb-2">潮汕社群联盟</p>
+          <div className="w-12 h-px bg-white/30 mx-auto my-8" />
+          <p className="text-base text-white/60 leading-relaxed">
+            以个体链接城市
+          </p>
         </div>
+      </div>
 
-        <Card className="shadow-lg">
-          <CardHeader className="space-y-1 pb-4">
-            <CardTitle className="text-xl">注册新账号</CardTitle>
-            <CardDescription>填写信息完成注册</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
+      {/* 右侧注册表单 */}
+      <div className="flex-1 flex items-center justify-center px-6 py-12">
+        <div className="w-full max-w-sm">
+          {/* 移动端 Logo */}
+          <div className="text-center mb-10 lg:hidden">
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-white text-xl mx-auto mb-4 bg-[#2C4A46]">
+              社
+            </div>
+            <h1 className="text-xl font-bold text-[#2C4A46]">创建账号</h1>
+          </div>
+
+          <div className="bg-white rounded-2xl shadow-[0_2px_8px_rgba(0,0,0,0.06)] p-8">
+            <div className="mb-6 hidden lg:block">
+              <h1 className="text-2xl font-bold text-[#2C4A46]">创建账号</h1>
+              <p className="text-sm text-[#888] mt-1">加入社群平台</p>
+            </div>
+
+            {/* 步骤指示器 - 圆点 */}
+            <div className="flex items-center justify-center gap-2 mb-8">
+              <div className={`w-2.5 h-2.5 rounded-full transition-all ${step === 1 ? 'bg-[#2C4A46] scale-110' : 'bg-[#2C4A46]/20'}`} />
+              <div className={`w-2.5 h-2.5 rounded-full transition-all ${step === 2 ? 'bg-[#2C4A46] scale-110' : 'bg-[#2C4A46]/20'}`} />
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-5">
               {error && (
-                <div className="p-3 text-sm text-red-600 bg-red-50 rounded-lg">
+                <div className="p-3 text-sm text-red-600 bg-red-50 rounded-xl">
                   {error}
                 </div>
               )}
 
-              {/* 步骤指示器 */}
-              <div className="flex items-center justify-center gap-2 mb-6">
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${step >= 1 ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-500'}`}>1</div>
-                <div className={`w-16 h-0.5 ${step >= 2 ? 'bg-orange-500' : 'bg-gray-200'}`}></div>
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${step >= 2 ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-500'}`}>2</div>
-              </div>
-
               {step === 1 ? (
                 <>
-                  <div className="space-y-2">
-                    <Label htmlFor="name">昵称</Label>
+                  <div className="space-y-1.5">
+                    <label htmlFor="name" className="text-sm font-medium text-[#333]">昵称</label>
                     <div className="relative">
-                      <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                      <Input
+                      <User className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#888]" />
+                      <input
                         id="name"
                         placeholder="输入昵称"
-                        className="pl-10"
+                        className="input-elegant pl-10"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         required
@@ -110,15 +124,15 @@ export default function RegisterPage() {
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="email">邮箱</Label>
+                  <div className="space-y-1.5">
+                    <label htmlFor="email" className="text-sm font-medium text-[#333]">邮箱</label>
                     <div className="relative">
-                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                      <Input
+                      <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#888]" />
+                      <input
                         id="email"
                         type="email"
                         placeholder="your@email.com"
-                        className="pl-10"
+                        className="input-elegant pl-10"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
@@ -126,24 +140,66 @@ export default function RegisterPage() {
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="phone">手机号</Label>
+                  <div className="space-y-1.5">
+                    <label htmlFor="phone" className="text-sm font-medium text-[#333]">手机号</label>
                     <div className="relative">
-                      <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                      <Input
+                      <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#888]" />
+                      <input
                         id="phone"
                         type="tel"
                         placeholder="输入手机号"
-                        className="pl-10"
+                        className="input-elegant pl-10"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                       />
                     </div>
                   </div>
 
-                  <Button
+                  {/* 角色选择卡片 */}
+                  <div className="space-y-1.5">
+                    <label className="text-sm font-medium text-[#333]">角色选择</label>
+                    <div className="grid grid-cols-2 gap-3">
+                      <button
+                        type="button"
+                        onClick={() => setRole("USER")}
+                        className={`flex flex-col items-center gap-1.5 p-4 rounded-xl border-2 cursor-pointer transition-all ${
+                          role === "USER"
+                            ? "bg-[#2C4A46] border-[#2C4A46] text-white"
+                            : "bg-white border-[rgba(0,0,0,0.08)] text-[#333] hover:border-[#2C4A46]/30"
+                        }`}
+                      >
+                        <User className={`h-5 w-5 ${role === "USER" ? "text-white" : "text-[#888]"}`} />
+                        <span className="text-sm font-medium">普通用户</span>
+                        <span className={`text-xs ${role === "USER" ? "text-white/70" : "text-[#888]"}`}>
+                          参与活动学习
+                        </span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setRole("ORGANIZER")}
+                        className={`flex flex-col items-center gap-1.5 p-4 rounded-xl border-2 cursor-pointer transition-all ${
+                          role === "ORGANIZER"
+                            ? "bg-[#2C4A46] border-[#2C4A46] text-white"
+                            : "bg-white border-[rgba(0,0,0,0.08)] text-[#333] hover:border-[#2C4A46]/30"
+                        }`}
+                      >
+                        <svg className={`h-5 w-5 ${role === "ORGANIZER" ? "text-white" : "text-[#888]"}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                          <circle cx="9" cy="7" r="4" />
+                          <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                        <span className="text-sm font-medium">主理人</span>
+                        <span className={`text-xs ${role === "ORGANIZER" ? "text-white/70" : "text-[#888]"}`}>
+                          发布活动服务
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <button
                     type="button"
-                    className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600"
+                    className="btn-primary w-full py-3"
                     onClick={() => {
                       if (!name || !email) return
                       setStep(2)
@@ -151,19 +207,19 @@ export default function RegisterPage() {
                   >
                     下一步
                     <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
+                  </button>
                 </>
               ) : (
                 <>
-                  <div className="space-y-2">
-                    <Label htmlFor="password">密码</Label>
+                  <div className="space-y-1.5">
+                    <label htmlFor="password" className="text-sm font-medium text-[#333]">密码</label>
                     <div className="relative">
-                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                      <Input
+                      <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#888]" />
+                      <input
                         id="password"
                         type={showPassword ? "text" : "password"}
                         placeholder="设置密码（至少6位）"
-                        className="pl-10 pr-10"
+                        className="input-elegant pl-10 pr-10"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
@@ -171,22 +227,22 @@ export default function RegisterPage() {
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                        className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#888] hover:text-[#333]"
                       >
                         {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                       </button>
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="confirmPassword">确认密码</Label>
+                  <div className="space-y-1.5">
+                    <label htmlFor="confirmPassword" className="text-sm font-medium text-[#333]">确认密码</label>
                     <div className="relative">
-                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                      <Input
+                      <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#888]" />
+                      <input
                         id="confirmPassword"
                         type="password"
                         placeholder="再次输入密码"
-                        className="pl-10"
+                        className="input-elegant pl-10"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         required
@@ -194,64 +250,42 @@ export default function RegisterPage() {
                     </div>
                   </div>
 
-                  {/* 用户角色选择 */}
-                  <div className="space-y-2">
-                    <Label>角色选择</Label>
-                    <div className="grid grid-cols-2 gap-3">
-                      <label className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer hover:bg-orange-50 hover:border-orange-300 transition-colors has-[:checked]:border-orange-500 has-[:checked]:bg-orange-50">
-                        <input type="radio" name="role" value="USER" defaultChecked className="accent-orange-500" />
-                        <div>
-                          <p className="font-medium text-sm">普通用户</p>
-                          <p className="text-xs text-muted-foreground">参与活动学习</p>
-                        </div>
-                      </label>
-                      <label className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer hover:bg-orange-50 hover:border-orange-300 transition-colors has-[:checked]:border-orange-500 has-[:checked]:bg-orange-50">
-                        <input type="radio" name="role" value="ORGANIZER" className="accent-orange-500" />
-                        <div>
-                          <p className="font-medium text-sm">主理人</p>
-                          <p className="text-xs text-muted-foreground">发布活动服务</p>
-                        </div>
-                      </label>
-                    </div>
-                  </div>
-
                   <div className="flex gap-3">
-                    <Button
+                    <button
                       type="button"
-                      variant="outline"
-                      className="flex-1"
+                      className="btn-secondary flex-1 py-3"
                       onClick={() => setStep(1)}
                     >
                       上一步
-                    </Button>
-                    <Button
+                    </button>
+                    <button
                       type="submit"
-                      className="flex-1 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600"
+                      className="btn-primary flex-1 py-3"
                       disabled={loading}
                     >
                       {loading ? "注册中..." : "完成注册"}
                       {!loading && <ArrowRight className="ml-2 h-4 w-4" />}
-                    </Button>
+                    </button>
                   </div>
                 </>
               )}
 
-              <p className="text-xs text-muted-foreground text-center mt-4">
+              <p className="text-xs text-[#888] text-center mt-4">
                 注册即代表同意{" "}
-                <Link href="/terms" className="text-orange-600 hover:underline">用户协议</Link>
+                <Link href="/terms" className="text-[#2C4A46] hover:underline">用户协议</Link>
                 {" "}和{" "}
-                <Link href="/privacy" className="text-orange-600 hover:underline">隐私政策</Link>
+                <Link href="/privacy" className="text-[#2C4A46] hover:underline">隐私政策</Link>
               </p>
             </form>
 
-            <p className="text-center text-sm text-muted-foreground mt-6">
+            <p className="text-center text-sm text-[#888] mt-6">
               已有账号？{" "}
-              <Link href="/login" className="text-orange-600 font-medium hover:underline">
+              <Link href="/login" className="text-[#2C4A46] font-medium hover:underline">
                 立即登录
               </Link>
             </p>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
   )

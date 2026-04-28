@@ -21,150 +21,148 @@ export default function ProfileSettingsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50/50">
-      <div className="container px-4 md:px-6 py-8 max-w-3xl">
-        <div className="flex items-center gap-4 mb-8">
+    <div className="min-h-screen bg-gradient-elegant">
+      <div className="container-elegant section-spacing max-w-3xl">
+        <div className="flex items-center gap-4 mb-10">
           <Link href="/profile">
             <Button variant="ghost" size="icon">
               <ArrowLeft className="h-5 w-5" />
             </Button>
           </Link>
-          <h1 className="text-2xl font-bold">编辑资料</h1>
+          <h1 className="text-2xl font-bold text-[#333]">编辑资料</h1>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-8">
           {/* 头像 */}
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center gap-6">
-                <div className="relative">
-                  <Avatar className="h-24 w-24">
-                    <AvatarFallback className="text-2xl bg-gradient-to-br from-orange-400 to-red-500 text-white">S</AvatarFallback>
-                  </Avatar>
-                  <button className="absolute bottom-0 right-0 w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-orange-600 transition-colors">
-                    <Camera className="h-4 w-4" />
-                  </button>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg">Steven Chuang</h3>
-                  <p className="text-sm text-muted-foreground">支持 JPG、PNG 格式，大小不超过 2MB</p>
-                  <Button variant="outline" size="sm" className="mt-2">更换头像</Button>
-                </div>
+          <div className="card-elegant p-6">
+            <div className="flex items-center gap-6">
+              <div className="relative">
+                <Avatar className="h-24 w-24">
+                  <AvatarFallback className="text-2xl bg-[#2C4A46] text-white">S</AvatarFallback>
+                </Avatar>
+                <button className="absolute bottom-0 right-0 w-8 h-8 bg-[#2C4A46] text-white rounded-full flex items-center justify-center shadow-lg hover:bg-[#1f3633] transition-colors">
+                  <Camera className="h-4 w-4" />
+                </button>
               </div>
-            </CardContent>
-          </Card>
+              <div>
+                <h3 className="font-semibold text-base text-[#333]">Steven Chuang</h3>
+                <p className="text-sm text-[#888]">支持 JPG、PNG 格式，大小不超过 2MB</p>
+                <button className="btn-secondary text-xs mt-2">更换头像</button>
+              </div>
+            </div>
+          </div>
 
           {/* 基本信息 */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">基本信息</CardTitle>
-              <CardDescription>修改你的个人资料</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
+          <div className="card-elegant">
+            <div className="p-5 pb-3">
+              <h3 className="text-base font-semibold text-[#333]">基本信息</h3>
+              <p className="text-sm text-[#888]">修改你的个人资料</p>
+            </div>
+            <div className="px-5 pb-5 space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="name">昵称</Label>
-                  <Input id="name" defaultValue="Steven Chuang" />
+                  <Label htmlFor="name" className="text-sm text-[#333]">昵称</Label>
+                  <Input id="name" defaultValue="Steven Chuang" className="input-elegant" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="phone">手机号</Label>
+                  <Label htmlFor="phone" className="text-sm text-[#333]">手机号</Label>
                   <div className="relative">
-                    <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                    <Input id="phone" className="pl-10" defaultValue="138****8888" />
+                    <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#888]" />
+                    <Input id="phone" className="pl-10 input-elegant" defaultValue="138****8888" />
                   </div>
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="email">邮箱</Label>
+                <Label htmlFor="email" className="text-sm text-[#333]">邮箱</Label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input id="email" type="email" className="pl-10" defaultValue="steven@yujian.space" />
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#888]" />
+                  <Input id="email" type="email" className="pl-10 input-elegant" defaultValue="steven@yujian.space" />
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="bio">个人简介</Label>
+                <Label htmlFor="bio" className="text-sm text-[#333]">个人简介</Label>
                 <textarea
                   id="bio"
-                  className="flex min-h-[100px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="input-elegant min-h-[100px]"
                   defaultValue="88年潮汕人 | 摩羯座 | 20+年连续创业者&#10;TCC潮汕社群大会发起人&#10;屿见社创空间创始人"
                 />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="location">所在城市</Label>
+                  <Label htmlFor="location" className="text-sm text-[#333]">所在城市</Label>
                   <div className="relative">
-                    <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                    <Input id="location" className="pl-10" defaultValue="深圳" />
+                    <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#888]" />
+                    <Input id="location" className="pl-10 input-elegant" defaultValue="深圳" />
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="website">个人网站</Label>
+                  <Label htmlFor="website" className="text-sm text-[#333]">个人网站</Label>
                   <div className="relative">
-                    <LinkIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                    <Input id="website" className="pl-10" defaultValue="https://yujian.space" />
+                    <LinkIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#888]" />
+                    <Input id="website" className="pl-10 input-elegant" defaultValue="https://yujian.space" />
                   </div>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
           {/* 社交账号 */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">社交账号</CardTitle>
-              <CardDescription>绑定你的社交账号</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
+          <div className="card-elegant">
+            <div className="p-5 pb-3">
+              <h3 className="text-base font-semibold text-[#333]">社交账号</h3>
+              <p className="text-sm text-[#888]">绑定你的社交账号</p>
+            </div>
+            <div className="px-5 pb-5 space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label>微信号</Label>
-                  <Input defaultValue="steven_chuang" />
+                  <Label className="text-sm text-[#333]">微信号</Label>
+                  <Input defaultValue="steven_chuang" className="input-elegant" />
                 </div>
                 <div className="space-y-2">
-                  <Label>微博</Label>
-                  <Input placeholder="输入微博ID" />
+                  <Label className="text-sm text-[#333]">微博</Label>
+                  <Input placeholder="输入微博ID" className="input-elegant" />
                 </div>
                 <div className="space-y-2">
-                  <Label>GitHub</Label>
-                  <Input placeholder="输入GitHub用户名" />
+                  <Label className="text-sm text-[#333]">GitHub</Label>
+                  <Input placeholder="输入GitHub用户名" className="input-elegant" />
                 </div>
                 <div className="space-y-2">
-                  <Label>小红书</Label>
-                  <Input placeholder="输入小红书号" />
+                  <Label className="text-sm text-[#333]">小红书</Label>
+                  <Input placeholder="输入小红书号" className="input-elegant" />
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
           {/* 兴趣标签 */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">兴趣标签</CardTitle>
-              <CardDescription>添加你的兴趣标签，帮助别人了解你</CardDescription>
-            </CardHeader>
-            <CardContent>
+          <div className="card-elegant">
+            <div className="p-5 pb-3">
+              <h3 className="text-base font-semibold text-[#333]">兴趣标签</h3>
+              <p className="text-sm text-[#888]">添加你的兴趣标签，帮助别人了解你</p>
+            </div>
+            <div className="px-5 pb-5">
               <div className="flex flex-wrap gap-2 mb-4">
                 {["社群运营", "创业", "潮汕文化", "活动策划", "品牌设计"].map((tag) => (
-                  <Badge key={tag} variant="secondary" className="py-1.5 px-3 cursor-pointer hover:bg-red-100 hover:text-red-600">
+                  <span key={tag} className="tag-elegant cursor-pointer hover:opacity-70">
                     {tag} ×
-                  </Badge>
+                  </span>
                 ))}
-                <Badge variant="outline" className="py-1.5 px-3 cursor-pointer hover:bg-orange-50">
+                <span className="tag-elegant cursor-pointer hover:opacity-70" style={{ backgroundColor: 'transparent', border: '1px dashed #2C4A46' }}>
                   + 添加标签
-                </Badge>
+                </span>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
           {/* 保存按钮 */}
-          <div className="flex justify-end gap-3">
+          <div className="flex justify-end gap-3 pb-8">
             <Link href="/profile">
-              <Button variant="outline">取消</Button>
+              <button className="btn-secondary">取消</button>
             </Link>
-            <Button onClick={handleSave} disabled={saving} className="bg-gradient-to-r from-orange-500 to-red-500">
+            <button onClick={handleSave} disabled={saving} className="btn-primary">
               <Save className="mr-2 h-4 w-4" />
               {saving ? "保存中..." : "保存修改"}
-            </Button>
+            </button>
           </div>
         </div>
       </div>

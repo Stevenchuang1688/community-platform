@@ -130,45 +130,45 @@ export default function ShopPage() {
   })
 
   return (
-    <div className="min-h-screen bg-gray-50/50">
+    <div className="min-h-screen bg-gradient-elegant">
       {/* Header */}
-      <div className="bg-gradient-to-r from-pink-500 to-rose-500 text-white">
-        <div className="container px-4 md:px-6 py-12">
+      <div className="bg-[#2C4A46] text-white">
+        <div className="container-elegant py-12">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-bold">精选商城</h1>
-              <p className="text-pink-100 mt-1">为主理人精选的工具、课程和服务</p>
+              <h1 className="text-2xl font-bold">精选商城</h1>
+              <p className="text-[#F5F1E9]/80 mt-1 text-sm">为主理人精选的工具、课程和服务</p>
             </div>
             <Link href="/cart">
-              <Button variant="secondary" className="text-pink-600">
+              <button className="btn-secondary bg-[#F5F1E9] text-[#2C4A46] border-[#F5F1E9] hover:bg-white">
                 <ShoppingCart className="mr-2 h-4 w-4" />
                 购物车
-              </Button>
+              </button>
             </Link>
           </div>
         </div>
       </div>
 
-      <div className="container px-4 md:px-6 py-8">
+      <div className="container-elegant section-spacing">
         {/* Banner */}
-        <Card className="mb-8 bg-gradient-to-r from-pink-50 to-rose-50 border-pink-200 overflow-hidden">
-          <CardContent className="p-6 flex flex-col md:flex-row items-center gap-6">
+        <div className="card-elegant mb-10 bg-[#F5F1E9] overflow-hidden">
+          <div className="p-6 flex flex-col md:flex-row items-center gap-6">
             <div className="flex-1">
-              <Badge className="mb-2 bg-pink-100 text-pink-700 hover:bg-pink-100">限时特惠</Badge>
-              <h2 className="text-2xl font-bold mb-2">新用户专享</h2>
-              <p className="text-muted-foreground">首次购买任意商品享受8折优惠，使用优惠码: <span className="font-mono font-bold text-pink-600">NEW2026</span></p>
+              <span className="tag-elegant mb-2 inline-block">限时特惠</span>
+              <h2 className="text-2xl font-bold mb-2 text-[#333]">新用户专享</h2>
+              <p className="text-[#888] text-sm">首次购买任意商品享受8折优惠，使用优惠码: <span className="font-mono font-bold text-[#2C4A46]">NEW2026</span></p>
             </div>
-            <div className="text-6xl">🎁</div>
-          </CardContent>
-        </Card>
+            <div className="text-5xl opacity-80">🎁</div>
+          </div>
+        </div>
 
         {/* Search & Categories */}
-        <div className="flex flex-col md:flex-row gap-4 mb-8">
+        <div className="flex flex-col md:flex-row gap-4 mb-10">
           <div className="relative flex-1 max-w-md">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#888]" />
             <Input
               placeholder="搜索商品..."
-              className="pl-10"
+              className="pl-10 input-elegant"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -193,11 +193,11 @@ export default function ShopPage() {
           </div>
         ) : (
           <div className="text-center py-20">
-            <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Search className="h-8 w-8 text-gray-400" />
+            <div className="w-16 h-16 bg-[#F5F1E9] rounded-full flex items-center justify-center mx-auto mb-4">
+              <Search className="h-8 w-8 text-[#888]" />
             </div>
-            <h3 className="text-lg font-semibold">没有找到相关商品</h3>
-            <p className="text-muted-foreground mt-1">试试其他关键词</p>
+            <h3 className="text-lg font-semibold text-[#333]">没有找到相关商品</h3>
+            <p className="text-sm text-[#888] mt-1">试试其他关键词</p>
           </div>
         )}
       </div>
@@ -212,65 +212,67 @@ function ProductCard({ product }: { product: any }) {
 
   return (
     <Link href={`/shop/product/${product.id}`}>
-        <Card className="overflow-hidden hover:shadow-lg transition-all hover:-translate-y-1 cursor-pointer group h-full">
-          {/* Image */}
-          <div className="aspect-square bg-gradient-to-br from-pink-100 to-rose-100 relative overflow-hidden">
-            {product.images[0] ? (
-              <img src={product.images[0]} alt={product.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center">
-                <ShoppingBag className="h-16 w-16 text-pink-200" />
-              </div>
-            )}
-            {discount > 0 && (
-              <div className="absolute top-3 left-3">
-                <Badge className="bg-red-500 text-white border-0">-{discount}%</Badge>
-              </div>
-            )}
-            <button className="absolute top-3 right-3 w-8 h-8 bg-white/80 rounded-full flex items-center justify-center hover:bg-white transition-colors">
-              <Heart className="h-4 w-4 text-gray-400 hover:text-red-500" />
-            </button>
+      <div className="card-elegant overflow-hidden cursor-pointer group h-full">
+        {/* Image */}
+        <div className="aspect-square bg-[#F5F1E9] relative overflow-hidden">
+          {product.images[0] ? (
+            <img src={product.images[0]} alt={product.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center">
+              <ShoppingBag className="h-16 w-16 text-[#2C4A46]/15" />
+            </div>
+          )}
+          {discount > 0 && (
+            <div className="absolute top-3 left-3">
+              <span className="bg-[#2C4A46] text-white text-xs px-2 py-1 rounded-full">-{discount}%</span>
+            </div>
+          )}
+          <button className="absolute top-3 right-3 w-8 h-8 bg-white/80 rounded-full flex items-center justify-center hover:bg-white transition-colors">
+            <Heart className="h-4 w-4 text-[#888]" />
+          </button>
+        </div>
+
+        {/* Info */}
+        <div className="p-4">
+          <h3 className="font-semibold text-sm line-clamp-2 group-hover:text-[#2C4A46] transition-colors text-[#333]">
+            {product.title}
+          </h3>
+          <p className="text-xs text-[#888] mt-1 line-clamp-1">{product.description}</p>
+
+          <div className="flex items-center gap-1 mt-2">
+            {product.tags.map((tag: string) => (
+              <span key={tag} className="tag-elegant text-[10px] px-2 py-0.5">{tag}</span>
+            ))}
           </div>
 
-          {/* Info */}
-          <CardContent className="p-4">
-            <h3 className="font-semibold line-clamp-2 group-hover:text-pink-600 transition-colors">
-              {product.title}
-            </h3>
-            <p className="text-sm text-muted-foreground mt-1 line-clamp-1">{product.description}</p>
-
-            <div className="flex items-center gap-1 mt-2">
-              {product.tags.map((tag: string) => (
-                <Badge key={tag} variant="outline" className="text-xs">{tag}</Badge>
-              ))}
+          <div className="flex items-end justify-between mt-3">
+            <div>
+              <span className="text-xl font-bold text-[#2C4A46]">¥{product.price}</span>
+              {product.originalPrice && (
+                <span className="text-xs text-[#888] line-through ml-2">¥{product.originalPrice}</span>
+              )}
             </div>
-
-            <div className="flex items-end justify-between mt-3">
-              <div>
-                <span className="text-xl font-bold text-pink-600">¥{product.price}</span>
-                {product.originalPrice && (
-                  <span className="text-sm text-muted-foreground line-through ml-2">¥{product.originalPrice}</span>
-                )}
-              </div>
-              <div className="flex items-center gap-1 text-amber-500 text-sm">
-                <Star className="h-3.5 w-3.5 fill-current" />
-                {product.rating}
-              </div>
+            <div className="flex items-center gap-1 text-[#2C4A46] text-sm">
+              <Star className="h-3.5 w-3.5 fill-current" />
+              {product.rating}
             </div>
+          </div>
 
-            <div className="flex items-center justify-between mt-3 pt-3 border-t">
-              <div className="flex items-center gap-2">
-                <Avatar className="h-5 w-5">
-                  <AvatarFallback className="text-xs bg-pink-100 text-pink-700">
-                    {product.seller.name[0]}
-                  </AvatarFallback>
-                </Avatar>
-                <span className="text-xs text-muted-foreground">{product.seller.name}</span>
-              </div>
-              <span className="text-xs text-muted-foreground">已售 {product.sales}</span>
+          <div className="divider-light mt-3" />
+
+          <div className="flex items-center justify-between mt-3">
+            <div className="flex items-center gap-2">
+              <Avatar className="h-5 w-5">
+                <AvatarFallback className="text-xs bg-[#F5F1E9] text-[#2C4A46]">
+                  {product.seller.name[0]}
+                </AvatarFallback>
+              </Avatar>
+              <span className="text-xs text-[#888]">{product.seller.name}</span>
             </div>
-          </CardContent>
-        </Card>
+            <span className="text-xs text-[#888]">已售 {product.sales}</span>
+          </div>
+        </div>
+      </div>
     </Link>
   )
 }

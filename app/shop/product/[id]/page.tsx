@@ -63,75 +63,75 @@ export default function ProductDetailPage() {
     : 0
 
   const handleAddToCart = () => {
-    // 模拟加入购物车
     setAddedToCart(true)
     setTimeout(() => setAddedToCart(false), 2000)
   }
 
   const handleBuyNow = () => {
-    // 跳转结算页
     window.location.href = `/checkout?product=${product.id}&qty=${quantity}`
   }
 
   return (
-    <div className="min-h-screen bg-gray-50/50">
-      <div className="container px-4 md:px-6 py-8">
+    <div className="min-h-screen bg-gradient-elegant">
+      <div className="container-elegant section-spacing">
         {/* 面包屑 */}
-        <nav className="text-sm text-muted-foreground mb-6">
-          <Link href="/shop" className="hover:text-foreground">商城</Link>
+        <nav className="text-sm text-[#888] mb-8">
+          <Link href="/shop" className="hover:text-[#2C4A46]">商城</Link>
           <span className="mx-2">/</span>
-          <span className="text-foreground">{product.category}</span>
+          <span className="text-[#333]">{product.category}</span>
           <span className="mx-2">/</span>
           <span>{product.title}</span>
         </nav>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           {/* 左侧：商品图片 */}
           <div className="space-y-4">
-            <div className="aspect-square bg-gradient-to-br from-pink-100 to-rose-100 rounded-2xl flex items-center justify-center relative overflow-hidden">
+            <div className="aspect-square bg-[#F5F1E9] rounded-2xl flex items-center justify-center relative overflow-hidden">
               {product.images[0] ? (
                 <img src={product.images[0]} alt={product.title} className="w-full h-full object-cover" />
               ) : (
                 <div className="text-center">
-                  <div className="text-6xl mb-4">📚</div>
-                  <p className="text-pink-300">{product.title}</p>
+                  <div className="text-6xl mb-4 opacity-60">📚</div>
+                  <p className="text-[#2C4A46]/40 text-sm">{product.title}</p>
                 </div>
               )}
               {discount > 0 && (
                 <div className="absolute top-4 left-4">
-                  <Badge className="bg-red-500 text-white border-0 text-lg px-3 py-1">-{discount}%</Badge>
+                  <span className="bg-[#2C4A46] text-white text-sm px-3 py-1 rounded-full">-{discount}%</span>
                 </div>
               )}
             </div>
           </div>
 
           {/* 右侧：商品信息 */}
-          <div className="space-y-6">
+          <div className="space-y-8">
             <div>
-              <div className="flex items-center gap-2 mb-2">
+              <div className="flex items-center gap-2 mb-3">
                 {product.tags.map((tag) => (
-                  <Badge key={tag} variant="secondary">{tag}</Badge>
+                  <span key={tag} className="tag-elegant">{tag}</span>
                 ))}
               </div>
-              <h1 className="text-2xl md:text-3xl font-bold">{product.title}</h1>
-              <p className="text-muted-foreground mt-2">{product.description}</p>
+              <h1 className="text-2xl font-bold text-[#333]">{product.title}</h1>
+              <p className="text-[#888] mt-2 text-sm">{product.description}</p>
             </div>
 
             {/* 价格 */}
-            <div className="bg-pink-50 rounded-xl p-4">
+            <div className="bg-[#F5F1E9] rounded-xl p-5">
               <div className="flex items-baseline gap-3">
-                <span className="text-3xl font-bold text-pink-600">¥{product.price}</span>
+                <span className="text-3xl font-bold text-[#2C4A46]">¥{product.price}</span>
                 {product.originalPrice && (
-                  <span className="text-lg text-muted-foreground line-through">¥{product.originalPrice}</span>
+                  <span className="text-base text-[#888] line-through">¥{product.originalPrice}</span>
                 )}
                 {discount > 0 && (
-                  <Badge className="bg-red-100 text-red-600 border-0">省 ¥{product.originalPrice! - product.price}</Badge>
+                  <span className="tag-elegant" style={{ backgroundColor: '#2C4A46', color: '#F5F1E9' }}>
+                    省 ¥{product.originalPrice! - product.price}
+                  </span>
                 )}
               </div>
-              <div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground">
+              <div className="flex items-center gap-4 mt-2 text-sm text-[#888]">
                 <span>已售 {product.sales}</span>
                 <span>库存 {product.stock}</span>
-                <div className="flex items-center gap-1 text-amber-500">
+                <div className="flex items-center gap-1 text-[#2C4A46]">
                   <Star className="h-4 w-4 fill-current" />
                   {product.rating} ({product.reviews}评价)
                 </div>
@@ -139,49 +139,48 @@ export default function ProductDetailPage() {
             </div>
 
             {/* 卖家信息 */}
-            <div className="flex items-center gap-3 p-4 bg-white rounded-xl border">
+            <div className="flex items-center gap-3 p-4 card-elegant">
               <Avatar className="h-10 w-10">
-                <AvatarFallback className="bg-pink-100 text-pink-700">{product.seller.name[0]}</AvatarFallback>
+                <AvatarFallback className="bg-[#F5F1E9] text-[#2C4A46]">{product.seller.name[0]}</AvatarFallback>
               </Avatar>
               <div className="flex-1">
-                <p className="font-medium">{product.seller.name}</p>
-                <p className="text-sm text-muted-foreground">{product.seller.bio}</p>
+                <p className="font-medium text-sm text-[#333]">{product.seller.name}</p>
+                <p className="text-xs text-[#888]">{product.seller.bio}</p>
               </div>
-              <Button variant="outline" size="sm">关注</Button>
+              <button className="btn-secondary text-xs">关注</button>
             </div>
 
             {/* 数量选择 */}
             <div className="flex items-center gap-4">
-              <span className="text-sm font-medium">数量</span>
-              <div className="flex items-center border rounded-lg">
+              <span className="text-sm font-medium text-[#333]">数量</span>
+              <div className="flex items-center border rounded-xl overflow-hidden border-[#e5e5e5]">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-10 h-10 flex items-center justify-center hover:bg-gray-100 rounded-l-lg"
+                  className="w-10 h-10 flex items-center justify-center hover:bg-[#F5F1E9] transition-colors"
                 >
                   <Minus className="h-4 w-4" />
                 </button>
-                <span className="w-12 h-10 flex items-center justify-center border-x font-medium">{quantity}</span>
+                <span className="w-12 h-10 flex items-center justify-center border-x border-[#e5e5e5] font-medium text-sm">{quantity}</span>
                 <button
                   onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
-                  className="w-10 h-10 flex items-center justify-center hover:bg-gray-100 rounded-r-lg"
+                  className="w-10 h-10 flex items-center justify-center hover:bg-[#F5F1E9] transition-colors"
                 >
                   <Plus className="h-4 w-4" />
                 </button>
               </div>
-              <span className="text-sm text-muted-foreground">小计: <span className="text-pink-600 font-bold">¥{(product.price * quantity).toFixed(2)}</span></span>
+              <span className="text-sm text-[#888]">小计: <span className="text-[#2C4A46] font-bold">¥{(product.price * quantity).toFixed(2)}</span></span>
             </div>
 
             {/* 操作按钮 */}
             <div className="flex gap-3">
-              <Button
-                className="flex-1 h-12 text-lg bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600"
+              <button
+                className="btn-primary flex-1 h-12 text-base"
                 onClick={handleBuyNow}
               >
                 立即购买
-              </Button>
-              <Button
-                variant="outline"
-                className="flex-1 h-12 text-lg border-pink-300 text-pink-600 hover:bg-pink-50"
+              </button>
+              <button
+                className="btn-secondary flex-1 h-12 text-base"
                 onClick={handleAddToCart}
               >
                 {addedToCart ? (
@@ -189,27 +188,27 @@ export default function ProductDetailPage() {
                 ) : (
                   <><ShoppingCart className="mr-2 h-5 w-5" />加入购物车</>
                 )}
-              </Button>
-              <Button variant="outline" size="icon" className="h-12 w-12">
+              </button>
+              <button className="btn-secondary h-12 w-12 !px-0">
                 <Heart className="h-5 w-5" />
-              </Button>
-              <Button variant="outline" size="icon" className="h-12 w-12">
+              </button>
+              <button className="btn-secondary h-12 w-12 !px-0">
                 <Share2 className="h-5 w-5" />
-              </Button>
+              </button>
             </div>
 
             {/* 服务保障 */}
-            <div className="grid grid-cols-3 gap-4 p-4 bg-white rounded-xl border">
-              <div className="flex items-center gap-2 text-sm">
-                <Shield className="h-4 w-4 text-green-500" />
+            <div className="grid grid-cols-3 gap-4 p-4 card-elegant">
+              <div className="flex items-center gap-2 text-sm text-[#888]">
+                <Shield className="h-4 w-4 text-[#2C4A46]" />
                 <span>正品保障</span>
               </div>
-              <div className="flex items-center gap-2 text-sm">
-                <Truck className="h-4 w-4 text-blue-500" />
+              <div className="flex items-center gap-2 text-sm text-[#888]">
+                <Truck className="h-4 w-4 text-[#2C4A46]" />
                 <span>极速发货</span>
               </div>
-              <div className="flex items-center gap-2 text-sm">
-                <RotateCcw className="h-4 w-4 text-orange-500" />
+              <div className="flex items-center gap-2 text-sm text-[#888]">
+                <RotateCcw className="h-4 w-4 text-[#2C4A46]" />
                 <span>7天退款</span>
               </div>
             </div>
@@ -217,62 +216,60 @@ export default function ProductDetailPage() {
         </div>
 
         {/* 商品详情/评价 Tabs */}
-        <div className="mt-12">
-          <div className="flex gap-6 border-b mb-6">
+        <div className="mt-16">
+          <div className="flex gap-6 border-b mb-8">
             <button
               onClick={() => setActiveTab("detail")}
-              className={`pb-3 text-lg font-medium border-b-2 transition-colors ${activeTab === "detail" ? "border-pink-500 text-pink-600" : "border-transparent text-muted-foreground hover:text-foreground"}`}
+              className={`pb-3 text-base font-medium border-b-2 transition-colors ${activeTab === "detail" ? "border-[#2C4A46] text-[#2C4A46]" : "border-transparent text-[#888] hover:text-[#333]"}`}
             >
               商品详情
             </button>
             <button
               onClick={() => setActiveTab("reviews")}
-              className={`pb-3 text-lg font-medium border-b-2 transition-colors ${activeTab === "reviews" ? "border-pink-500 text-pink-600" : "border-transparent text-muted-foreground hover:text-foreground"}`}
+              className={`pb-3 text-base font-medium border-b-2 transition-colors ${activeTab === "reviews" ? "border-[#2C4A46] text-[#2C4A46]" : "border-transparent text-[#888] hover:text-[#333]"}`}
             >
               用户评价 ({product.reviews})
             </button>
           </div>
 
           {activeTab === "detail" ? (
-            <Card>
-              <CardHeader>
-                <CardTitle>课程内容包含</CardTitle>
+            <div className="card-elegant p-6">
+              <CardHeader className="p-0 pb-4">
+                <CardTitle className="text-base font-semibold text-[#333]">课程内容包含</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="p-0">
                 <ul className="space-y-3">
                   {product.features.map((feature, index) => (
                     <li key={index} className="flex items-start gap-3">
-                      <CheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
-                      <span>{feature}</span>
+                      <CheckCircle2 className="h-5 w-5 text-[#2C4A46] mt-0.5 shrink-0" />
+                      <span className="text-sm text-[#333]">{feature}</span>
                     </li>
                   ))}
                 </ul>
               </CardContent>
-            </Card>
+            </div>
           ) : (
             <div className="space-y-4">
               {reviews.map((review, index) => (
-                <Card key={index}>
-                  <CardContent className="p-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-2">
-                        <Avatar className="h-8 w-8">
-                          <AvatarFallback className="text-xs bg-pink-100 text-pink-700">{review.user[0]}</AvatarFallback>
-                        </Avatar>
-                        <span className="font-medium text-sm">{review.user}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className="flex">
-                          {Array.from({ length: 5 }).map((_, i) => (
-                            <Star key={i} className={`h-3.5 w-3.5 ${i < review.rating ? 'text-amber-500 fill-current' : 'text-gray-300'}`} />
-                          ))}
-                        </div>
-                        <span className="text-xs text-muted-foreground">{review.date}</span>
-                      </div>
+                <div key={index} className="card-elegant p-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <Avatar className="h-8 w-8">
+                        <AvatarFallback className="text-xs bg-[#F5F1E9] text-[#2C4A46]">{review.user[0]}</AvatarFallback>
+                      </Avatar>
+                      <span className="font-medium text-sm text-[#333]">{review.user}</span>
                     </div>
-                    <p className="text-sm">{review.content}</p>
-                  </CardContent>
-                </Card>
+                    <div className="flex items-center gap-2">
+                      <div className="flex">
+                        {Array.from({ length: 5 }).map((_, i) => (
+                          <Star key={i} className={`h-3.5 w-3.5 ${i < review.rating ? 'text-[#2C4A46] fill-current' : 'text-gray-300'}`} />
+                        ))}
+                      </div>
+                      <span className="text-xs text-[#888]">{review.date}</span>
+                    </div>
+                  </div>
+                  <p className="text-sm text-[#333]">{review.content}</p>
+                </div>
               ))}
             </div>
           )}

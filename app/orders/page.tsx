@@ -52,13 +52,13 @@ const orders = [
 ]
 
 const statusConfig: Record<string, { label: string; color: string; icon: any }> = {
-  PENDING: { label: "待付款", color: "bg-amber-100 text-amber-700", icon: Clock },
-  PAID: { label: "已付款", color: "bg-blue-100 text-blue-700", icon: CheckCircle2 },
-  SHIPPED: { label: "已发货", color: "bg-indigo-100 text-indigo-700", icon: Truck },
-  DELIVERED: { label: "已完成", color: "bg-green-100 text-green-700", icon: Package },
-  CANCELLED: { label: "已取消", color: "bg-gray-100 text-gray-500", icon: XCircle },
-  REFUNDING: { label: "退款中", color: "bg-orange-100 text-orange-700", icon: Clock },
-  REFUNDED: { label: "已退款", color: "bg-red-100 text-red-700", icon: XCircle },
+  PENDING: { label: "待付款", color: "bg-[#F5F1E9] text-[#2C4A46]", icon: Clock },
+  PAID: { label: "已付款", color: "bg-[#F5F1E9] text-[#2C4A46]", icon: CheckCircle2 },
+  SHIPPED: { label: "已发货", color: "bg-[#F5F1E9] text-[#2C4A46]", icon: Truck },
+  DELIVERED: { label: "已完成", color: "bg-[#2C4A46] text-white", icon: Package },
+  CANCELLED: { label: "已取消", color: "bg-gray-100 text-[#888]", icon: XCircle },
+  REFUNDING: { label: "退款中", color: "bg-[#F5F1E9] text-[#2C4A46]", icon: Clock },
+  REFUNDED: { label: "已退款", color: "bg-gray-100 text-[#888]", icon: XCircle },
 }
 
 export default function OrdersPage() {
@@ -74,18 +74,18 @@ export default function OrdersPage() {
   })
 
   return (
-    <div className="min-h-screen bg-gray-50/50">
-      <div className="container px-4 md:px-6 py-8">
-        <div className="flex items-center gap-4 mb-6">
+    <div className="min-h-screen bg-gradient-elegant">
+      <div className="container-elegant section-spacing">
+        <div className="flex items-center gap-4 mb-8">
           <Link href="/shop">
             <Button variant="ghost" size="icon">
               <ArrowLeft className="h-5 w-5" />
             </Button>
           </Link>
-          <h1 className="text-2xl font-bold">我的订单</h1>
+          <h1 className="text-2xl font-bold text-[#333]">我的订单</h1>
         </div>
 
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-6">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-8">
           <TabsList>
             <TabsTrigger value="all">全部</TabsTrigger>
             <TabsTrigger value="pending">待付款</TabsTrigger>
@@ -102,81 +102,83 @@ export default function OrdersPage() {
               const StatusIcon = config?.icon || Clock
 
               return (
-                <Card key={order.id}>
-                  <CardHeader className="pb-3">
+                <div key={order.id} className="card-elegant">
+                  <div className="p-5 pb-3">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <span className="text-sm text-muted-foreground">订单号</span>
-                        <span className="font-mono text-sm">{order.id}</span>
+                        <span className="text-sm text-[#888]">订单号</span>
+                        <span className="font-mono text-sm text-[#333]">{order.id}</span>
                       </div>
-                      <Badge className={`${config?.color} border-0`}>
-                        <StatusIcon className="h-3 w-3 mr-1" />
+                      <span className={`${config?.color} text-xs px-2.5 py-1 rounded-full font-medium inline-flex items-center gap-1`}>
+                        <StatusIcon className="h-3 w-3" />
                         {config?.label}
-                      </Badge>
+                      </span>
                     </div>
-                  </CardHeader>
-                  <CardContent>
+                  </div>
+                  <div className="px-5 pb-5">
                     <div className="space-y-3">
                       {order.items.map((item, index) => (
                         <div key={index} className="flex items-center gap-3">
-                          <div className="w-14 h-14 bg-pink-100 rounded-lg flex items-center justify-center shrink-0">
-                            <ShoppingBag className="h-6 w-6 text-pink-400" />
+                          <div className="w-14 h-14 bg-[#F5F1E9] rounded-xl flex items-center justify-center shrink-0">
+                            <ShoppingBag className="h-6 w-6 text-[#2C4A46]/20" />
                           </div>
                           <div className="flex-1">
-                            <p className="font-medium text-sm">{item.title}</p>
-                            <p className="text-xs text-muted-foreground">x{item.quantity}</p>
+                            <p className="font-medium text-sm text-[#333]">{item.title}</p>
+                            <p className="text-xs text-[#888]">x{item.quantity}</p>
                           </div>
-                          <span className="text-sm font-medium">¥{(item.price * item.quantity).toFixed(2)}</span>
+                          <span className="text-sm font-medium text-[#333]">¥{(item.price * item.quantity).toFixed(2)}</span>
                         </div>
                       ))}
                     </div>
 
-                    <div className="flex items-center justify-between mt-4 pt-4 border-t">
-                      <div className="text-sm text-muted-foreground">
+                    <div className="divider-light mt-4" />
+
+                    <div className="flex items-center justify-between mt-4">
+                      <div className="text-sm text-[#888]">
                         <span>{order.createdAt}</span>
                         <span className="mx-2">·</span>
                         <span>{order.payMethod}</span>
                       </div>
                       <div className="flex items-center gap-3">
-                        <span className="text-sm text-muted-foreground">
+                        <span className="text-sm text-[#888]">
                           共 {order.items.reduce((s, i) => s + i.quantity, 0)} 件
                         </span>
-                        <span className="font-bold text-pink-600">¥{order.totalAmount.toFixed(2)}</span>
+                        <span className="font-bold text-[#2C4A46]">¥{order.totalAmount.toFixed(2)}</span>
                       </div>
                     </div>
 
                     <div className="flex justify-end gap-2 mt-4">
                       {order.status === "PENDING" && (
                         <>
-                          <Button variant="outline" size="sm">取消订单</Button>
-                          <Button size="sm" className="bg-gradient-to-r from-pink-500 to-rose-500">立即支付</Button>
+                          <button className="btn-secondary text-xs !px-3 !py-1.5">取消订单</button>
+                          <button className="btn-primary text-xs !px-3 !py-1.5">立即支付</button>
                         </>
                       )}
                       {order.status === "PAID" && (
-                        <Button variant="outline" size="sm">申请退款</Button>
+                        <button className="btn-secondary text-xs !px-3 !py-1.5">申请退款</button>
                       )}
                       {order.status === "DELIVERED" && (
                         <>
-                          <Button variant="outline" size="sm">申请售后</Button>
-                          <Button size="sm" className="bg-gradient-to-r from-pink-500 to-rose-500">再次购买</Button>
+                          <button className="btn-secondary text-xs !px-3 !py-1.5">申请售后</button>
+                          <button className="btn-primary text-xs !px-3 !py-1.5">再次购买</button>
                         </>
                       )}
                       {order.status === "CANCELLED" && (
-                        <Button variant="outline" size="sm">删除订单</Button>
+                        <button className="btn-secondary text-xs !px-3 !py-1.5">删除订单</button>
                       )}
                     </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               )
             })}
           </div>
         ) : (
           <div className="text-center py-20">
-            <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <ShoppingBag className="h-8 w-8 text-gray-300" />
+            <div className="w-16 h-16 bg-[#F5F1E9] rounded-full flex items-center justify-center mx-auto mb-4">
+              <ShoppingBag className="h-8 w-8 text-[#2C4A46]/20" />
             </div>
-            <h3 className="text-lg font-semibold">暂无订单</h3>
-            <p className="text-muted-foreground mt-1">去商城逛逛吧</p>
+            <h3 className="text-lg font-semibold text-[#333]">暂无订单</h3>
+            <p className="text-[#888] mt-1 text-sm">去商城逛逛吧</p>
           </div>
         )}
       </div>

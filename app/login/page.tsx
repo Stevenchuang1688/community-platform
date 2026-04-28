@@ -3,11 +3,6 @@
 import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Separator } from "@/components/ui/separator"
 import { Eye, EyeOff, Mail, Lock, ArrowRight } from "lucide-react"
 
 export default function LoginPage() {
@@ -33,7 +28,6 @@ export default function LoginPage() {
       const data = await res.json()
 
       if (data.success) {
-        // 保存 token
         localStorage.setItem("token", data.token)
         localStorage.setItem("user", JSON.stringify(data.user))
         router.push("/")
@@ -49,39 +43,57 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50 to-red-50 px-4">
-      <div className="w-full max-w-md">
-        {/* Logo */}
-        <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-2xl flex items-center justify-center text-white text-2xl mx-auto mb-4">
+    <div className="min-h-screen flex items-stretch bg-[#F5F1E9]">
+      {/* 左侧品牌文案 */}
+      <div className="hidden lg:flex lg:w-1/2 flex-col justify-center items-center px-12 bg-[#2C4A46]">
+        <div className="max-w-md text-center">
+          <div className="w-20 h-20 rounded-2xl flex items-center justify-center text-white text-3xl mx-auto mb-10 border border-white/20 bg-white/10">
             社
           </div>
-          <h1 className="text-2xl font-bold">欢迎回来</h1>
-          <p className="text-muted-foreground mt-1">登录你的社群主理人账号</p>
+          <h2 className="text-3xl font-bold text-white mb-4 tracking-wide">
+            谦懋乐享
+          </h2>
+          <p className="text-xl text-white/80 mb-2">潮汕社群联盟</p>
+          <div className="w-12 h-px bg-white/30 mx-auto my-8" />
+          <p className="text-base text-white/60 leading-relaxed">
+            以个体链接城市
+          </p>
         </div>
+      </div>
 
-        <Card className="shadow-lg">
-          <CardHeader className="space-y-1 pb-4">
-            <CardTitle className="text-xl">账号登录</CardTitle>
-            <CardDescription>输入邮箱和密码登录</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
+      {/* 右侧登录表单 */}
+      <div className="flex-1 flex items-center justify-center px-6 py-12">
+        <div className="w-full max-w-sm">
+          {/* 移动端 Logo */}
+          <div className="text-center mb-10 lg:hidden">
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-white text-xl mx-auto mb-4 bg-[#2C4A46]">
+              社
+            </div>
+            <h1 className="text-xl font-bold text-[#2C4A46]">欢迎回来</h1>
+          </div>
+
+          <div className="bg-white rounded-2xl shadow-[0_2px_8px_rgba(0,0,0,0.06)] p-8">
+            <div className="mb-8 hidden lg:block">
+              <h1 className="text-2xl font-bold text-[#2C4A46]">欢迎回来</h1>
+              <p className="text-sm text-[#888] mt-1">登录你的账号</p>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-5">
               {error && (
-                <div className="p-3 text-sm text-red-600 bg-red-50 rounded-lg">
+                <div className="p-3 text-sm text-red-600 bg-red-50 rounded-xl">
                   {error}
                 </div>
               )}
 
-              <div className="space-y-2">
-                <Label htmlFor="email">邮箱</Label>
+              <div className="space-y-1.5">
+                <label htmlFor="email" className="text-sm font-medium text-[#333]">邮箱</label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input
+                  <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#888]" />
+                  <input
                     id="email"
                     type="email"
                     placeholder="your@email.com"
-                    className="pl-10"
+                    className="input-elegant pl-10"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
@@ -89,20 +101,20 @@ export default function LoginPage() {
                 </div>
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
-                  <Label htmlFor="password">密码</Label>
-                  <Link href="/forgot-password" className="text-xs text-orange-600 hover:underline">
+                  <label htmlFor="password" className="text-sm font-medium text-[#333]">密码</label>
+                  <Link href="/forgot-password" className="text-xs text-[#2C4A46] hover:underline">
                     忘记密码？
                   </Link>
                 </div>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input
+                  <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#888]" />
+                  <input
                     id="password"
                     type={showPassword ? "text" : "password"}
                     placeholder="输入密码"
-                    className="pl-10 pr-10"
+                    className="input-elegant pl-10 pr-10"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
@@ -110,52 +122,52 @@ export default function LoginPage() {
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#888] hover:text-[#333]"
                   >
                     {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </button>
                 </div>
               </div>
 
-              <Button
+              <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600"
+                className="btn-primary w-full py-3"
                 disabled={loading}
               >
                 {loading ? "登录中..." : "登录"}
                 {!loading && <ArrowRight className="ml-2 h-4 w-4" />}
-              </Button>
+              </button>
             </form>
 
-            <Separator className="my-6" />
+            <div className="divider-light my-6" />
 
             {/* 第三方登录 */}
             <div className="space-y-3">
-              <p className="text-center text-sm text-muted-foreground">其他登录方式</p>
+              <p className="text-center text-xs text-[#888]">其他登录方式</p>
               <div className="grid grid-cols-2 gap-3">
-                <Button variant="outline" className="w-full">
-                  <svg className="h-5 w-5 mr-2" viewBox="0 0 24 24">
+                <button className="btn-secondary w-full py-2.5 text-sm">
+                  <svg className="h-4 w-4 mr-1.5" viewBox="0 0 24 24">
                     <path fill="#07C160" d="M8.69 13.6c-.32 0-.58-.26-.58-.58s.26-.58.58-.58.58.26.58.58-.26.58-.58.58zm-2.94 0c-.32 0-.58-.26-.58-.58s.26-.58.58-.58.58.26.58.58-.26.58-.58.58zm4.78 3.1c-.32 0-.58-.26-.58-.58s.26-.58.58-.58.58.26.58.58-.26.58-.58.58zm-2.94 0c-.32 0-.58-.26-.58-.58s.26-.58.58-.58.58.26.58.58-.26.58-.58.58zM12 2C6.48 2 2 5.81 2 10.5c0 2.66 1.46 5.04 3.75 6.63-.12.76-.67 2.73-2.86 4.87 2.48-.35 4.48-1.58 5.64-2.56.79.19 1.63.3 2.47.32V22h2v-2.27c.89-.04 1.75-.17 2.57-.38 1.16.98 3.16 2.21 5.64 2.56-2.19-2.14-2.74-4.11-2.86-4.87C20.54 15.54 22 13.16 22 10.5 22 5.81 17.52 2 12 2z"/>
                   </svg>
                   微信登录
-                </Button>
-                <Button variant="outline" className="w-full">
-                  <svg className="h-5 w-5 mr-2" viewBox="0 0 24 24">
-                    <path fill="#1677FF" d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z"/>
+                </button>
+                <button className="btn-secondary w-full py-2.5 text-sm">
+                  <svg className="h-4 w-4 mr-1.5" viewBox="0 0 24 24">
+                    <path fill="#2C4A46" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
                   </svg>
                   手机登录
-                </Button>
+                </button>
               </div>
             </div>
 
-            <p className="text-center text-sm text-muted-foreground mt-6">
+            <p className="text-center text-sm text-[#888] mt-6">
               还没有账号？{" "}
-              <Link href="/register" className="text-orange-600 font-medium hover:underline">
+              <Link href="/register" className="text-[#2C4A46] font-medium hover:underline">
                 立即注册
               </Link>
             </p>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
   )
