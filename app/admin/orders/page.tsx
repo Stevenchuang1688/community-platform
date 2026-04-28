@@ -16,23 +16,23 @@ const orders = [
 ]
 
 const statusMap: Record<string, { label: string; color: string }> = {
-  PENDING: { label: "待付款", color: "bg-amber-100 text-amber-700" },
-  PAID: { label: "已付款", color: "bg-blue-100 text-blue-700" },
-  SHIPPED: { label: "已发货", color: "bg-indigo-100 text-indigo-700" },
-  DELIVERED: { label: "已完成", color: "bg-green-100 text-green-700" },
-  CANCELLED: { label: "已取消", color: "bg-gray-100 text-gray-500" },
-  REFUNDING: { label: "退款中", color: "bg-orange-100 text-orange-700" },
+  PENDING: { label: "待付款", color: "bg-[#d4cfc5]/60 text-[#5a6b66]" },
+  PAID: { label: "已付款", color: "bg-[#2C4A46]/10 text-[#2C4A46]" },
+  SHIPPED: { label: "已发货", color: "bg-[#2C4A46]/15 text-[#2C4A46]" },
+  DELIVERED: { label: "已完成", color: "bg-[#2C4A46]/20 text-[#2C4A46]" },
+  CANCELLED: { label: "已取消", color: "bg-[#d4cfc5]/40 text-[#8a9490]" },
+  REFUNDING: { label: "退款中", color: "bg-red-50 text-red-600" },
 }
 
 export default function AdminOrdersPage() {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-[#F5F1E9]">
       <div className="flex">
-        <aside className="hidden md:flex w-64 bg-white border-r flex-col h-screen sticky top-0">
-          <div className="p-6 border-b">
+        <aside className="hidden md:flex w-64 bg-white border-r border-[#e5e0d5] flex-col h-screen sticky top-0">
+          <div className="p-6 border-b border-[#e5e0d5]">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-red-500 rounded-lg flex items-center justify-center text-white text-sm">社</div>
-              <div><p className="font-bold text-sm">管理后台</p><p className="text-xs text-muted-foreground">社群主理人平台</p></div>
+              <div className="w-8 h-8 bg-[#2C4A46] rounded-lg flex items-center justify-center text-white text-sm font-medium">社</div>
+              <div><p className="font-bold text-sm text-[#2C4A46]">管理后台</p><p className="text-xs text-[#8a9490]">社群主理人平台</p></div>
             </div>
           </div>
           <nav className="flex-1 p-4 space-y-1">
@@ -43,7 +43,7 @@ export default function AdminOrdersPage() {
               { href: "/admin/orders", label: "订单管理", icon: Package },
             ].map((item) => (
               <Link key={item.href} href={item.href}>
-                <button className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${item.href === '/admin/orders' ? 'bg-orange-50 text-orange-600' : 'hover:bg-orange-50 hover:text-orange-600'}`}>
+                <button className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${item.href === '/admin/orders' ? 'bg-[#2C4A46]/10 text-[#2C4A46]' : 'text-[#5a6b66] hover:bg-[#2C4A46]/5 hover:text-[#2C4A46]'}`}>
                   <item.icon className="h-4 w-4" />{item.label}
                 </button>
               </Link>
@@ -53,45 +53,45 @@ export default function AdminOrdersPage() {
 
         <main className="flex-1 p-6 md:p-8">
           <div className="flex items-center gap-4 mb-6">
-            <Link href="/admin"><Button variant="ghost" size="icon"><ArrowLeft className="h-5 w-5" /></Button></Link>
-            <div><h1 className="text-2xl font-bold">订单管理</h1><p className="text-muted-foreground text-sm">共 {orders.length} 个订单</p></div>
+            <Link href="/admin"><Button variant="ghost" size="icon" className="text-[#2C4A46] hover:bg-[#2C4A46]/5"><ArrowLeft className="h-5 w-5" /></Button></Link>
+            <div><h1 className="text-2xl font-bold text-[#2C4A46]">订单管理</h1><p className="text-[#8a9490] text-sm">共 {orders.length} 个订单</p></div>
           </div>
 
           <div className="mb-6">
             <div className="relative max-w-md">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input placeholder="搜索订单号..." className="pl-10" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#8a9490]" />
+              <Input placeholder="搜索订单号..." className="input-elegant pl-10 border-[#d4cfc5] focus:border-[#2C4A46] focus:ring-[#2C4A46]/20" />
             </div>
           </div>
 
-          <Card>
+          <Card className="card-elegant border-[#d4cfc5] shadow-sm">
             <CardContent className="p-0">
               <table className="w-full">
                 <thead>
-                  <tr className="border-b bg-gray-50">
-                    <th className="text-left p-4 text-sm font-medium text-muted-foreground">订单号</th>
-                    <th className="text-left p-4 text-sm font-medium text-muted-foreground">用户</th>
-                    <th className="text-left p-4 text-sm font-medium text-muted-foreground">金额</th>
-                    <th className="text-left p-4 text-sm font-medium text-muted-foreground">状态</th>
-                    <th className="text-left p-4 text-sm font-medium text-muted-foreground">支付方式</th>
-                    <th className="text-left p-4 text-sm font-medium text-muted-foreground">时间</th>
-                    <th className="text-left p-4 text-sm font-medium text-muted-foreground">操作</th>
+                  <tr className="border-b border-[#e5e0d5] bg-[#2C4A46]/[0.03]">
+                    <th className="text-left p-4 text-sm font-medium text-[#5a6b66]">订单号</th>
+                    <th className="text-left p-4 text-sm font-medium text-[#5a6b66]">用户</th>
+                    <th className="text-left p-4 text-sm font-medium text-[#5a6b66]">金额</th>
+                    <th className="text-left p-4 text-sm font-medium text-[#5a6b66]">状态</th>
+                    <th className="text-left p-4 text-sm font-medium text-[#5a6b66]">支付方式</th>
+                    <th className="text-left p-4 text-sm font-medium text-[#5a6b66]">时间</th>
+                    <th className="text-left p-4 text-sm font-medium text-[#5a6b66]">操作</th>
                   </tr>
                 </thead>
                 <tbody>
                   {orders.map((order) => (
-                    <tr key={order.id} className="border-b hover:bg-gray-50">
-                      <td className="p-4 font-mono text-sm">{order.id}</td>
-                      <td className="p-4 text-sm">{order.user}</td>
-                      <td className="p-4 text-sm font-medium">¥{order.amount}</td>
-                      <td className="p-4"><Badge className={`${statusMap[order.status].color} border-0 text-xs`}>{statusMap[order.status].label}</Badge></td>
-                      <td className="p-4 text-sm text-muted-foreground">{order.method}</td>
-                      <td className="p-4 text-sm text-muted-foreground">{order.time}</td>
+                    <tr key={order.id} className="border-b border-[#e5e0d5] hover:bg-[#F5F1E9]/70 transition-colors">
+                      <td className="p-4 font-mono text-sm text-[#2C4A46]">{order.id}</td>
+                      <td className="p-4 text-sm text-[#3d5753]">{order.user}</td>
+                      <td className="p-4 text-sm font-medium text-[#2C4A46]">¥{order.amount}</td>
+                      <td className="p-4"><Badge className={`${statusMap[order.status].color} tag-elegant border-0 text-xs`}>{statusMap[order.status].label}</Badge></td>
+                      <td className="p-4 text-sm text-[#8a9490]">{order.method}</td>
+                      <td className="p-4 text-sm text-[#8a9490]">{order.time}</td>
                       <td className="p-4">
                         <div className="flex gap-1">
-                          <Button variant="ghost" size="icon" className="h-8 w-8"><Eye className="h-4 w-4" /></Button>
+                          <Button variant="ghost" size="icon" className="btn-secondary h-8 w-8 text-[#2C4A46] hover:bg-[#2C4A46]/5"><Eye className="h-4 w-4" /></Button>
                           {order.status === "PAID" && (
-                            <Button variant="ghost" size="icon" className="h-8 w-8 text-blue-500"><Truck className="h-4 w-4" /></Button>
+                            <Button variant="ghost" size="icon" className="btn-secondary h-8 w-8 text-[#2C4A46] hover:bg-[#2C4A46]/5"><Truck className="h-4 w-4" /></Button>
                           )}
                         </div>
                       </td>
