@@ -98,14 +98,14 @@ export default function SkillsPage() {
   return (
     <div className="min-h-screen bg-gradient-elegant">
       {/* Header */}
-      <div className="bg-[#2C4A46] text-white">
+      <div className="bg-[#6366F1] text-white">
         <div className="container-elegant py-12">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
               <h1 className="text-2xl font-bold">技能互换</h1>
-              <p className="text-[#F5F1E9]/80 mt-1 text-sm">用你擅长的技能，换取想学的技能</p>
+              <p className="text-[#F0F0FF]/80 mt-1 text-sm">用你擅长的技能，换取想学的技能</p>
             </div>
-            <button className="btn-secondary bg-[#F5F1E9] text-[#2C4A46] border-[#F5F1E9] hover:bg-white">
+            <button className="btn-secondary bg-[#F0F0FF] text-[#6366F1] border-[#F0F0FF] hover:bg-white">
               <Plus className="mr-2 h-4 w-4" />
               发布技能
             </button>
@@ -137,7 +137,7 @@ export default function SkillsPage() {
                 <button
                   onClick={() => setSelectedCategory(null)}
                   className={`w-full text-left px-3 py-2 rounded-xl transition-colors text-sm ${
-                    selectedCategory === null ? 'bg-[#F5F1E9] text-[#2C4A46] font-medium' : 'hover:bg-[#F5F1E9]/50 text-[#333]'
+                    selectedCategory === null ? 'bg-[#F0F0FF] text-[#6366F1] font-medium' : 'hover:bg-[#F0F0FF]/50 text-[#333]'
                   }`}
                 >
                   全部技能
@@ -147,7 +147,7 @@ export default function SkillsPage() {
                     key={category.id}
                     onClick={() => setSelectedCategory(category.id)}
                     className={`w-full text-left px-3 py-2 rounded-xl transition-colors flex items-center gap-2 text-sm ${
-                      selectedCategory === category.id ? 'bg-[#F5F1E9] text-[#2C4A46] font-medium' : 'hover:bg-[#F5F1E9]/50 text-[#333]'
+                      selectedCategory === category.id ? 'bg-[#F0F0FF] text-[#6366F1] font-medium' : 'hover:bg-[#F0F0FF]/50 text-[#333]'
                     }`}
                   >
                     <span>{category.icon}</span>
@@ -157,8 +157,8 @@ export default function SkillsPage() {
               </div>
             </div>
 
-            <div className="card-elegant p-5 bg-[#F5F1E9]">
-              <Lightbulb className="h-8 w-8 text-[#2C4A46] mb-3" />
+            <div className="card-elegant p-5 bg-[#F0F0FF]">
+              <Lightbulb className="h-8 w-8 text-[#6366F1] mb-3" />
               <h3 className="text-base font-semibold text-[#333]">如何交换技能？</h3>
               <div className="mt-3 text-sm text-[#888] space-y-2">
                 <p>1. 发布你能教的技能</p>
@@ -187,7 +187,7 @@ export default function SkillsPage() {
                   </div>
                 ) : (
                   <div className="text-center py-20 card-elegant">
-                    <div className="w-16 h-16 bg-[#F5F1E9] rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div className="w-16 h-16 bg-[#F0F0FF] rounded-full flex items-center justify-center mx-auto mb-4">
                       <Search className="h-8 w-8 text-[#888]" />
                     </div>
                     <h3 className="text-lg font-semibold text-[#333]">没有找到相关技能</h3>
@@ -198,7 +198,7 @@ export default function SkillsPage() {
 
               <TabsContent value="teach">
                 <div className="text-center py-20 card-elegant">
-                  <Lightbulb className="h-16 w-16 text-[#2C4A46]/20 mx-auto mb-4" />
+                  <Lightbulb className="h-16 w-16 text-[#6366F1]/20 mx-auto mb-4" />
                   <h3 className="text-lg font-semibold text-[#333]">浏览能教的技能</h3>
                   <p className="text-sm text-[#888] mt-1">这里展示大家能教的技能列表</p>
                 </div>
@@ -206,7 +206,7 @@ export default function SkillsPage() {
 
               <TabsContent value="learn">
                 <div className="text-center py-20 card-elegant">
-                  <Lightbulb className="h-16 w-16 text-[#2C4A46]/20 mx-auto mb-4" />
+                  <Lightbulb className="h-16 w-16 text-[#6366F1]/20 mx-auto mb-4" />
                   <h3 className="text-lg font-semibold text-[#333]">浏览想学的技能</h3>
                   <p className="text-sm text-[#888] mt-1">这里展示大家想学的技能列表</p>
                 </div>
@@ -234,7 +234,7 @@ function SkillExchangeCard({ skill }: { skill: any }) {
         <div className="flex items-center gap-3 md:w-48">
           <Avatar className="h-12 w-12">
             <AvatarImage src={skill.user.avatar} />
-            <AvatarFallback className="bg-[#F5F1E9] text-[#2C4A46]">
+            <AvatarFallback className="bg-[#F0F0FF] text-[#6366F1]">
               {skill.user.name[0]}
             </AvatarFallback>
           </Avatar>
@@ -265,7 +265,7 @@ function SkillExchangeCard({ skill }: { skill: any }) {
 
           <div className="flex-1 w-full sm:w-auto">
             <p className="text-xs text-[#888] mb-1">我想学</p>
-            <span className="tag-elegant" style={{ backgroundColor: '#2C4A46', color: '#F5F1E9' }}>
+            <span className="tag-elegant" style={{ backgroundColor: '#6366F1', color: '#F0F0FF' }}>
               {skill.learn.name}
             </span>
           </div>

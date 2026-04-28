@@ -67,12 +67,12 @@ export default function ProfilePage() {
     <div className="min-h-screen bg-gradient-elegant">
       {/* 个人封面 */}
       <div className="relative">
-        <div className="h-48 bg-[#2C4A46]"></div>
+        <div className="h-48 bg-[#6366F1]"></div>
         <div className="container-elegant">
           <div className="flex flex-col md:flex-row items-start md:items-end gap-4 -mt-16 relative z-10 pb-8">
             <Avatar className="h-32 w-32 border-4 border-white shadow-lg">
               <AvatarImage src={currentUser.avatar} />
-              <AvatarFallback className="text-3xl bg-[#2C4A46] text-white">
+              <AvatarFallback className="text-3xl bg-[#6366F1] text-white">
                 {currentUser.name[0]}
               </AvatarFallback>
             </Avatar>
@@ -110,19 +110,19 @@ export default function ProfilePage() {
             {/* 统计数据 */}
             <div className="card-elegant p-5">
               <div className="grid grid-cols-2 gap-4">
-                <Link href="/profile/activities" className="text-center p-3 rounded-xl hover:bg-[#F5F1E9] transition-colors">
+                <Link href="/profile/activities" className="text-center p-3 rounded-xl hover:bg-[#F0F0FF] transition-colors">
                   <p className="text-2xl font-bold text-[#333]">{currentUser.stats.activities}</p>
                   <p className="text-sm text-[#888]">活动</p>
                 </Link>
-                <div className="text-center p-3 rounded-xl hover:bg-[#F5F1E9] transition-colors cursor-pointer">
+                <div className="text-center p-3 rounded-xl hover:bg-[#F0F0FF] transition-colors cursor-pointer">
                   <p className="text-2xl font-bold text-[#333]">{currentUser.stats.followers}</p>
                   <p className="text-sm text-[#888]">粉丝</p>
                 </div>
-                <div className="text-center p-3 rounded-xl hover:bg-[#F5F1E9] transition-colors cursor-pointer">
+                <div className="text-center p-3 rounded-xl hover:bg-[#F0F0FF] transition-colors cursor-pointer">
                   <p className="text-2xl font-bold text-[#333]">{currentUser.stats.following}</p>
                   <p className="text-sm text-[#888]">关注</p>
                 </div>
-                <div className="text-center p-3 rounded-xl hover:bg-[#F5F1E9] transition-colors cursor-pointer">
+                <div className="text-center p-3 rounded-xl hover:bg-[#F0F0FF] transition-colors cursor-pointer">
                   <p className="text-2xl font-bold text-[#333]">{currentUser.stats.likes}</p>
                   <p className="text-sm text-[#888]">获赞</p>
                 </div>
@@ -139,7 +139,7 @@ export default function ProfilePage() {
                 </div>
                 <div className="flex items-center gap-2 text-[#888]">
                   <LinkIcon className="h-4 w-4" />
-                  <a href={currentUser.website} className="text-[#2C4A46] hover:underline">{currentUser.website}</a>
+                  <a href={currentUser.website} className="text-[#6366F1] hover:underline">{currentUser.website}</a>
                 </div>
                 <div className="flex items-center gap-2 text-[#888]">
                   <MessageCircle className="h-4 w-4" />
@@ -166,7 +166,7 @@ export default function ProfilePage() {
                   <div key={skill.name} className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                        skill.type === "teach" ? "bg-[#F5F1E9] text-[#2C4A46]" : "bg-[#2C4A46] text-[#F5F1E9]"
+                        skill.type === "teach" ? "bg-[#F0F0FF] text-[#6366F1]" : "bg-[#6366F1] text-[#F0F0FF]"
                       }`}>
                         {skill.type === "teach" ? "能教" : "想学"}
                       </span>
@@ -193,7 +193,7 @@ export default function ProfilePage() {
                   <div key={post.id} className="card-elegant p-6">
                     <div className="flex items-center gap-3 mb-4">
                       <Avatar className="h-10 w-10">
-                        <AvatarFallback className="bg-[#2C4A46] text-white text-sm">
+                        <AvatarFallback className="bg-[#6366F1] text-white text-sm">
                           {currentUser.name[0]}
                         </AvatarFallback>
                       </Avatar>
@@ -205,11 +205,11 @@ export default function ProfilePage() {
                     <p className="text-sm text-[#333] leading-relaxed">{post.content}</p>
                     <div className="divider-light mt-4" />
                     <div className="flex items-center gap-6 mt-4">
-                      <button className="flex items-center gap-1.5 text-[#888] hover:text-[#2C4A46] transition-colors">
+                      <button className="flex items-center gap-1.5 text-[#888] hover:text-[#6366F1] transition-colors">
                         <Heart className="h-4 w-4" />
                         <span className="text-sm">{post.likes}</span>
                       </button>
-                      <button className="flex items-center gap-1.5 text-[#888] hover:text-[#2C4A46] transition-colors">
+                      <button className="flex items-center gap-1.5 text-[#888] hover:text-[#6366F1] transition-colors">
                         <MessageCircle className="h-4 w-4" />
                         <span className="text-sm">{post.comments}</span>
                       </button>
@@ -260,7 +260,7 @@ export default function ProfilePage() {
                       <p className="text-sm text-[#888] mt-1">1对1深度咨询，帮你解决社群运营难题</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-lg font-bold text-[#2C4A46]">¥299</p>
+                      <p className="text-lg font-bold text-[#6366F1]">¥299</p>
                       <p className="text-xs text-[#888]">已售 32 单</p>
                     </div>
                   </div>

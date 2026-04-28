@@ -92,8 +92,8 @@ export default function CartPage() {
 
         {cartItems.length === 0 ? (
           <div className="text-center py-20">
-            <div className="w-20 h-20 bg-[#F5F1E9] rounded-full flex items-center justify-center mx-auto mb-4">
-              <ShoppingCart className="h-10 w-10 text-[#2C4A46]/20" />
+            <div className="w-20 h-20 bg-[#F0F0FF] rounded-full flex items-center justify-center mx-auto mb-4">
+              <ShoppingCart className="h-10 w-10 text-[#6366F1]/20" />
             </div>
             <h3 className="text-lg font-semibold text-[#333]">购物车是空的</h3>
             <p className="text-[#888] mt-1 mb-6 text-sm">去商城逛逛，发现好物</p>
@@ -115,7 +115,7 @@ export default function CartPage() {
                     type="checkbox"
                     checked={allSelected}
                     onChange={toggleSelectAll}
-                    className="h-4 w-4 accent-[#2C4A46]"
+                    className="h-4 w-4 accent-[#6366F1]"
                   />
                   <span className="font-medium text-sm text-[#333]">全选</span>
                   <span className="text-sm text-[#888]">({selectedItems.length}/{cartItems.length})</span>
@@ -124,19 +124,19 @@ export default function CartPage() {
 
               {/* 商品列表 */}
               {cartItems.map((item) => (
-                <div key={item.id} className={`card-elegant p-4 ${item.selected ? "border-l-2 border-l-[#2C4A46]" : ""}`}>
+                <div key={item.id} className={`card-elegant p-4 ${item.selected ? "border-l-2 border-l-[#6366F1]" : ""}`}>
                   <div className="flex gap-4">
                     <input
                       type="checkbox"
                       checked={item.selected}
                       onChange={() => toggleSelect(item.id)}
-                      className="h-4 w-4 mt-6 accent-[#2C4A46]"
+                      className="h-4 w-4 mt-6 accent-[#6366F1]"
                     />
-                    <div className="w-20 h-20 bg-[#F5F1E9] rounded-xl flex items-center justify-center shrink-0">
+                    <div className="w-20 h-20 bg-[#F0F0FF] rounded-xl flex items-center justify-center shrink-0">
                       {item.product.image ? (
                         <img src={item.product.image} alt={item.product.title} className="w-full h-full object-cover rounded-xl" />
                       ) : (
-                        <ShoppingBag className="h-8 w-8 text-[#2C4A46]/20" />
+                        <ShoppingBag className="h-8 w-8 text-[#6366F1]/20" />
                       )}
                     </div>
                     <div className="flex-1 min-w-0">
@@ -150,18 +150,18 @@ export default function CartPage() {
                         </button>
                       </div>
                       <div className="flex items-center justify-between mt-3">
-                        <span className="text-lg font-bold text-[#2C4A46]">¥{item.product.price}</span>
+                        <span className="text-lg font-bold text-[#6366F1]">¥{item.product.price}</span>
                         <div className="flex items-center border rounded-xl overflow-hidden border-[#e5e5e5]">
                           <button
                             onClick={() => updateQuantity(item.id, -1)}
-                            className="w-8 h-8 flex items-center justify-center hover:bg-[#F5F1E9] transition-colors"
+                            className="w-8 h-8 flex items-center justify-center hover:bg-[#F0F0FF] transition-colors"
                           >
                             <Minus className="h-3 w-3" />
                           </button>
                           <span className="w-10 h-8 flex items-center justify-center border-x border-[#e5e5e5] text-sm">{item.quantity}</span>
                           <button
                             onClick={() => updateQuantity(item.id, 1)}
-                            className="w-8 h-8 flex items-center justify-center hover:bg-[#F5F1E9] transition-colors"
+                            className="w-8 h-8 flex items-center justify-center hover:bg-[#F0F0FF] transition-colors"
                           >
                             <Plus className="h-3 w-3" />
                           </button>
@@ -199,7 +199,7 @@ export default function CartPage() {
 
                   <div className="flex justify-between items-center">
                     <span className="font-medium text-sm text-[#333]">合计</span>
-                    <span className="text-2xl font-bold text-[#2C4A46]">¥{totalAmount.toFixed(2)}</span>
+                    <span className="text-2xl font-bold text-[#6366F1]">¥{totalAmount.toFixed(2)}</span>
                   </div>
 
                   <Link href="/checkout">

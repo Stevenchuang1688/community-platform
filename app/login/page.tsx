@@ -43,9 +43,9 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-stretch bg-[#F5F1E9]">
+    <div className="min-h-screen flex items-stretch bg-[#F0F0FF]">
       {/* 左侧品牌文案 */}
-      <div className="hidden lg:flex lg:w-1/2 flex-col justify-center items-center px-12 bg-[#2C4A46]">
+      <div className="hidden lg:flex lg:w-1/2 flex-col justify-center items-center px-12 bg-[#6366F1]">
         <div className="max-w-md text-center">
           <div className="w-20 h-20 rounded-2xl flex items-center justify-center text-white text-3xl mx-auto mb-10 border border-white/20 bg-white/10">
             社
@@ -66,15 +66,15 @@ export default function LoginPage() {
         <div className="w-full max-w-sm">
           {/* 移动端 Logo */}
           <div className="text-center mb-10 lg:hidden">
-            <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-white text-xl mx-auto mb-4 bg-[#2C4A46]">
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-white text-xl mx-auto mb-4 bg-[#6366F1]">
               社
             </div>
-            <h1 className="text-xl font-bold text-[#2C4A46]">欢迎回来</h1>
+            <h1 className="text-xl font-bold text-[#6366F1]">欢迎回来</h1>
           </div>
 
           <div className="bg-white rounded-2xl shadow-[0_2px_8px_rgba(0,0,0,0.06)] p-8">
             <div className="mb-8 hidden lg:block">
-              <h1 className="text-2xl font-bold text-[#2C4A46]">欢迎回来</h1>
+              <h1 className="text-2xl font-bold text-[#6366F1]">欢迎回来</h1>
               <p className="text-sm text-[#888] mt-1">登录你的账号</p>
             </div>
 
@@ -104,7 +104,7 @@ export default function LoginPage() {
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
                   <label htmlFor="password" className="text-sm font-medium text-[#333]">密码</label>
-                  <Link href="/forgot-password" className="text-xs text-[#2C4A46] hover:underline">
+                  <Link href="/forgot-password" className="text-xs text-[#6366F1] hover:underline">
                     忘记密码？
                   </Link>
                 </div>
@@ -153,7 +153,7 @@ export default function LoginPage() {
                 </button>
                 <button className="btn-secondary w-full py-2.5 text-sm">
                   <svg className="h-4 w-4 mr-1.5" viewBox="0 0 24 24">
-                    <path fill="#2C4A46" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                    <path fill="#6366F1" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
                   </svg>
                   手机登录
                 </button>
@@ -162,7 +162,7 @@ export default function LoginPage() {
 
             <p className="text-center text-sm text-[#888] mt-6">
               还没有账号？{" "}
-              <Link href="/register" className="text-[#2C4A46] font-medium hover:underline">
+              <Link href="/register" className="text-[#6366F1] font-medium hover:underline">
                 立即注册
               </Link>
             </p>

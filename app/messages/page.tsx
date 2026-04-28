@@ -117,13 +117,13 @@ export default function MessagesPage() {
                     setSelectedChat(conv.id)
                     setShowMobile(true)
                   }}
-                  className={`w-full flex items-center gap-3 p-4 hover:bg-[#F5F1E9]/50 transition-colors text-left ${
-                    selectedChat === conv.id ? "bg-[#F5F1E9]" : ""
+                  className={`w-full flex items-center gap-3 p-4 hover:bg-[#F0F0FF]/50 transition-colors text-left ${
+                    selectedChat === conv.id ? "bg-[#F0F0FF]" : ""
                   }`}
                 >
                   <div className="relative">
                     <Avatar className="h-12 w-12">
-                      <AvatarFallback className="bg-[#F5F1E9] text-[#2C4A46]">{conv.user.name[0]}</AvatarFallback>
+                      <AvatarFallback className="bg-[#F0F0FF] text-[#6366F1]">{conv.user.name[0]}</AvatarFallback>
                     </Avatar>
                     {conv.online && (
                       <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></div>
@@ -137,7 +137,7 @@ export default function MessagesPage() {
                     <div className="flex items-center justify-between mt-0.5">
                       <p className="text-sm text-[#888] truncate">{conv.lastMessage}</p>
                       {conv.unread > 0 && (
-                        <span className="ml-2 bg-[#2C4A46] text-white text-xs h-5 min-w-[1.25rem] flex items-center justify-center rounded-full px-1">
+                        <span className="ml-2 bg-[#6366F1] text-white text-xs h-5 min-w-[1.25rem] flex items-center justify-center rounded-full px-1">
                           {conv.unread}
                         </span>
                       )}
@@ -159,7 +159,7 @@ export default function MessagesPage() {
                       <ArrowLeft className="h-5 w-5" />
                     </button>
                     <Avatar className="h-9 w-9">
-                      <AvatarFallback className="bg-[#F5F1E9] text-[#2C4A46] text-sm">
+                      <AvatarFallback className="bg-[#F0F0FF] text-[#6366F1] text-sm">
                         {activeConversation.user.name[0]}
                       </AvatarFallback>
                     </Avatar>
@@ -192,8 +192,8 @@ export default function MessagesPage() {
                         <div
                           className={`px-4 py-2.5 rounded-2xl text-sm ${
                             msg.sender === "me"
-                              ? "bg-[#2C4A46] text-white rounded-br-md"
-                              : "bg-[#F5F1E9] text-[#333] rounded-bl-md"
+                              ? "bg-[#6366F1] text-white rounded-br-md"
+                              : "bg-[#F0F0FF] text-[#333] rounded-bl-md"
                           }`}
                         >
                           {msg.content}
@@ -242,7 +242,7 @@ export default function MessagesPage() {
             ) : (
               <div className="flex-1 flex items-center justify-center">
                 <div className="text-center">
-                  <MessageCircle className="h-16 w-16 text-[#2C4A46]/15 mx-auto mb-4" />
+                  <MessageCircle className="h-16 w-16 text-[#6366F1]/15 mx-auto mb-4" />
                   <h3 className="text-lg font-semibold text-[#888]">选择一个会话开始聊天</h3>
                 </div>
               </div>

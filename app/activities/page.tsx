@@ -114,7 +114,7 @@ export default function ActivitiesPage() {
   return (
     <div className="min-h-screen bg-[#FFF]">
       {/* Header */}
-      <div className="border-b border-[#F5F1E9]/60">
+      <div className="border-b border-[#F0F0FF]/60">
         <div className="container-elegant section-spacing">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
@@ -149,8 +149,8 @@ export default function ActivitiesPage() {
                 onClick={() => setActiveTab(tab)}
                 className={`px-4 py-2 rounded-full text-sm transition-all ${
                   activeTab === tab
-                    ? "bg-[#2C4A46] text-white"
-                    : "bg-white text-[#888] border border-[#F5F1E9] hover:border-[#2C4A46]/30 hover:text-[#2C4A46]"
+                    ? "bg-[#6366F1] text-white"
+                    : "bg-white text-[#888] border border-[#F0F0FF] hover:border-[#6366F1]/30 hover:text-[#6366F1]"
                 }`}
               >
                 {tab === "all" ? "全部" : tab === "offline" ? "线下" : "线上"}
@@ -175,7 +175,7 @@ export default function ActivitiesPage() {
           </div>
         ) : (
           <div className="text-center py-20">
-            <div className="w-16 h-16 bg-[#F5F1E9] rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-16 h-16 bg-[#F0F0FF] rounded-full flex items-center justify-center mx-auto mb-4">
               <Search className="h-8 w-8 text-[#888]" />
             </div>
             <h3 className="text-xl font-semibold text-[#333]">没有找到相关活动</h3>
@@ -198,7 +198,7 @@ function ActivityCard({ activity }: { activity: any }) {
     <Link href={`/activities/${activity.id}`} className="block group">
       <div className="card-elegant h-full flex flex-col overflow-hidden">
         {/* Cover area */}
-        <div className="aspect-video bg-[#F5F1E9] relative overflow-hidden">
+        <div className="aspect-video bg-[#F0F0FF] relative overflow-hidden">
           {activity.coverImage ? (
             <img
               src={activity.coverImage}
@@ -206,7 +206,7 @@ function ActivityCard({ activity }: { activity: any }) {
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-[#2C4A46]/20">
+            <div className="w-full h-full flex items-center justify-center text-[#6366F1]/20">
               <Calendar className="h-12 w-12" />
             </div>
           )}
@@ -225,28 +225,28 @@ function ActivityCard({ activity }: { activity: any }) {
 
         {/* Content area */}
         <div className="flex-1 p-5 flex flex-col">
-          <h3 className="text-[15px] font-semibold text-[#333] line-clamp-1 group-hover:text-[#2C4A46] transition-colors">
+          <h3 className="text-[15px] font-semibold text-[#333] line-clamp-1 group-hover:text-[#6366F1] transition-colors">
             {activity.title}
           </h3>
           <p className="text-sm text-[#888] line-clamp-2 mt-2">{activity.description}</p>
 
           <div className="space-y-2 text-sm text-[#888] mt-4">
             <div className="flex items-center gap-2">
-              <Calendar className="h-4 w-4 text-[#2C4A46]/50" />
+              <Calendar className="h-4 w-4 text-[#6366F1]/50" />
               <span>{activity.startTime.toLocaleString('zh-CN', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
             </div>
             {activity.location && (
               <div className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-[#2C4A46]/50" />
+                <MapPin className="h-4 w-4 text-[#6366F1]/50" />
                 <span className="truncate">{activity.location}</span>
               </div>
             )}
           </div>
 
-          <div className="mt-auto pt-4 border-t border-[#F5F1E9]">
+          <div className="mt-auto pt-4 border-t border-[#F0F0FF]">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="h-7 w-7 rounded-full bg-[#2C4A46]/10 flex items-center justify-center text-xs text-[#2C4A46] font-medium">
+                <div className="h-7 w-7 rounded-full bg-[#6366F1]/10 flex items-center justify-center text-xs text-[#6366F1] font-medium">
                   {activity.organizer.name[0]}
                 </div>
                 <span className="text-xs text-[#888]">{activity.organizer.name}</span>

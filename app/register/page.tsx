@@ -59,9 +59,9 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-stretch bg-[#F5F1E9]">
+    <div className="min-h-screen flex items-stretch bg-[#F0F0FF]">
       {/* 左侧品牌文案 */}
-      <div className="hidden lg:flex lg:w-1/2 flex-col justify-center items-center px-12 bg-[#2C4A46]">
+      <div className="hidden lg:flex lg:w-1/2 flex-col justify-center items-center px-12 bg-[#6366F1]">
         <div className="max-w-md text-center">
           <div className="w-20 h-20 rounded-2xl flex items-center justify-center text-white text-3xl mx-auto mb-10 border border-white/20 bg-white/10">
             社
@@ -82,22 +82,22 @@ export default function RegisterPage() {
         <div className="w-full max-w-sm">
           {/* 移动端 Logo */}
           <div className="text-center mb-10 lg:hidden">
-            <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-white text-xl mx-auto mb-4 bg-[#2C4A46]">
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-white text-xl mx-auto mb-4 bg-[#6366F1]">
               社
             </div>
-            <h1 className="text-xl font-bold text-[#2C4A46]">创建账号</h1>
+            <h1 className="text-xl font-bold text-[#6366F1]">创建账号</h1>
           </div>
 
           <div className="bg-white rounded-2xl shadow-[0_2px_8px_rgba(0,0,0,0.06)] p-8">
             <div className="mb-6 hidden lg:block">
-              <h1 className="text-2xl font-bold text-[#2C4A46]">创建账号</h1>
+              <h1 className="text-2xl font-bold text-[#6366F1]">创建账号</h1>
               <p className="text-sm text-[#888] mt-1">加入社群平台</p>
             </div>
 
             {/* 步骤指示器 - 圆点 */}
             <div className="flex items-center justify-center gap-2 mb-8">
-              <div className={`w-2.5 h-2.5 rounded-full transition-all ${step === 1 ? 'bg-[#2C4A46] scale-110' : 'bg-[#2C4A46]/20'}`} />
-              <div className={`w-2.5 h-2.5 rounded-full transition-all ${step === 2 ? 'bg-[#2C4A46] scale-110' : 'bg-[#2C4A46]/20'}`} />
+              <div className={`w-2.5 h-2.5 rounded-full transition-all ${step === 1 ? 'bg-[#6366F1] scale-110' : 'bg-[#6366F1]/20'}`} />
+              <div className={`w-2.5 h-2.5 rounded-full transition-all ${step === 2 ? 'bg-[#6366F1] scale-110' : 'bg-[#6366F1]/20'}`} />
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5">
@@ -164,8 +164,8 @@ export default function RegisterPage() {
                         onClick={() => setRole("USER")}
                         className={`flex flex-col items-center gap-1.5 p-4 rounded-xl border-2 cursor-pointer transition-all ${
                           role === "USER"
-                            ? "bg-[#2C4A46] border-[#2C4A46] text-white"
-                            : "bg-white border-[rgba(0,0,0,0.08)] text-[#333] hover:border-[#2C4A46]/30"
+                            ? "bg-[#6366F1] border-[#6366F1] text-white"
+                            : "bg-white border-[rgba(0,0,0,0.08)] text-[#333] hover:border-[#6366F1]/30"
                         }`}
                       >
                         <User className={`h-5 w-5 ${role === "USER" ? "text-white" : "text-[#888]"}`} />
@@ -179,8 +179,8 @@ export default function RegisterPage() {
                         onClick={() => setRole("ORGANIZER")}
                         className={`flex flex-col items-center gap-1.5 p-4 rounded-xl border-2 cursor-pointer transition-all ${
                           role === "ORGANIZER"
-                            ? "bg-[#2C4A46] border-[#2C4A46] text-white"
-                            : "bg-white border-[rgba(0,0,0,0.08)] text-[#333] hover:border-[#2C4A46]/30"
+                            ? "bg-[#6366F1] border-[#6366F1] text-white"
+                            : "bg-white border-[rgba(0,0,0,0.08)] text-[#333] hover:border-[#6366F1]/30"
                         }`}
                       >
                         <svg className={`h-5 w-5 ${role === "ORGANIZER" ? "text-white" : "text-[#888]"}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -272,15 +272,15 @@ export default function RegisterPage() {
 
               <p className="text-xs text-[#888] text-center mt-4">
                 注册即代表同意{" "}
-                <Link href="/terms" className="text-[#2C4A46] hover:underline">用户协议</Link>
+                <Link href="/terms" className="text-[#6366F1] hover:underline">用户协议</Link>
                 {" "}和{" "}
-                <Link href="/privacy" className="text-[#2C4A46] hover:underline">隐私政策</Link>
+                <Link href="/privacy" className="text-[#6366F1] hover:underline">隐私政策</Link>
               </p>
             </form>
 
             <p className="text-center text-sm text-[#888] mt-6">
               已有账号？{" "}
-              <Link href="/login" className="text-[#2C4A46] font-medium hover:underline">
+              <Link href="/login" className="text-[#6366F1] font-medium hover:underline">
                 立即登录
               </Link>
             </p>

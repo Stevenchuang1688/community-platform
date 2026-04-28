@@ -41,14 +41,14 @@ export default function AdminUsersPage() {
   })
 
   return (
-    <div className="min-h-screen bg-[#F5F1E9]">
+    <div className="min-h-screen bg-[#F0F0FF]">
       <div className="flex">
-        <aside className="hidden md:flex w-64 bg-white border-r border-[#e5e0d5] flex-col h-screen sticky top-0">
-          <div className="p-6 border-b border-[#e5e0d5]">
+        <aside className="hidden md:flex w-64 bg-white border-r border-[#C7D2FE] flex-col h-screen sticky top-0">
+          <div className="p-6 border-b border-[#C7D2FE]">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-[#2C4A46] rounded-lg flex items-center justify-center text-white text-sm font-medium">社</div>
+              <div className="w-8 h-8 bg-[#6366F1] rounded-lg flex items-center justify-center text-white text-sm font-medium">社</div>
               <div>
-                <p className="font-bold text-sm text-[#2C4A46]">管理后台</p>
+                <p className="font-bold text-sm text-[#6366F1]">管理后台</p>
                 <p className="text-xs text-[#8a9490]">社群主理人平台</p>
               </div>
             </div>
@@ -61,7 +61,7 @@ export default function AdminUsersPage() {
               { href: "/admin/orders", label: "订单管理", icon: ShoppingBag },
             ].map((item) => (
               <Link key={item.href} href={item.href}>
-                <button className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${item.href === '/admin/users' ? 'bg-[#2C4A46]/10 text-[#2C4A46]' : 'text-[#5a6b66] hover:bg-[#2C4A46]/5 hover:text-[#2C4A46]'}`}>
+                <button className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${item.href === '/admin/users' ? 'bg-[#6366F1]/10 text-[#6366F1]' : 'text-[#5a6b66] hover:bg-[#6366F1]/5 hover:text-[#6366F1]'}`}>
                   <item.icon className="h-4 w-4" />
                   {item.label}
                 </button>
@@ -73,10 +73,10 @@ export default function AdminUsersPage() {
         <main className="flex-1 p-6 md:p-8">
           <div className="flex items-center gap-4 mb-6">
             <Link href="/admin">
-              <Button variant="ghost" size="icon" className="text-[#2C4A46] hover:bg-[#2C4A46]/5"><ArrowLeft className="h-5 w-5" /></Button>
+              <Button variant="ghost" size="icon" className="text-[#6366F1] hover:bg-[#6366F1]/5"><ArrowLeft className="h-5 w-5" /></Button>
             </Link>
             <div>
-              <h1 className="text-2xl font-bold text-[#2C4A46]">用户管理</h1>
+              <h1 className="text-2xl font-bold text-[#6366F1]">用户管理</h1>
               <p className="text-[#8a9490] text-sm">共 {mockUsers.length} 个用户</p>
             </div>
           </div>
@@ -84,23 +84,23 @@ export default function AdminUsersPage() {
           <div className="flex flex-col md:flex-row gap-4 mb-6">
             <div className="relative flex-1 max-w-md">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#8a9490]" />
-              <Input placeholder="搜索用户..." className="input-elegant pl-10 border-[#d4cfc5] focus:border-[#2C4A46] focus:ring-[#2C4A46]/20" value={search} onChange={(e) => setSearch(e.target.value)} />
+              <Input placeholder="搜索用户..." className="input-elegant pl-10 border-[#C7D2FE] focus:border-[#6366F1] focus:ring-[#6366F1]/20" value={search} onChange={(e) => setSearch(e.target.value)} />
             </div>
             <Tabs value={tab} onValueChange={setTab}>
-              <TabsList className="bg-[#2C4A46]/5 border-[#d4cfc5]">
-                <TabsTrigger value="all" className="data-[state=active]:bg-[#2C4A46] data-[state=active]:text-white">全部</TabsTrigger>
-                <TabsTrigger value="organizer" className="data-[state=active]:bg-[#2C4A46] data-[state=active]:text-white">主理人</TabsTrigger>
-                <TabsTrigger value="suspended" className="data-[state=active]:bg-[#2C4A46] data-[state=active]:text-white">已封禁</TabsTrigger>
+              <TabsList className="bg-[#6366F1]/5 border-[#C7D2FE]">
+                <TabsTrigger value="all" className="data-[state=active]:bg-[#6366F1] data-[state=active]:text-white">全部</TabsTrigger>
+                <TabsTrigger value="organizer" className="data-[state=active]:bg-[#6366F1] data-[state=active]:text-white">主理人</TabsTrigger>
+                <TabsTrigger value="suspended" className="data-[state=active]:bg-[#6366F1] data-[state=active]:text-white">已封禁</TabsTrigger>
               </TabsList>
             </Tabs>
           </div>
 
-          <Card className="card-elegant border-[#d4cfc5] shadow-sm">
+          <Card className="card-elegant border-[#C7D2FE] shadow-sm">
             <CardContent className="p-0">
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>
-                    <tr className="border-b border-[#e5e0d5] bg-[#2C4A46]/[0.03]">
+                    <tr className="border-b border-[#C7D2FE] bg-[#6366F1]/[0.03]">
                       <th className="text-left p-4 text-sm font-medium text-[#5a6b66]">用户</th>
                       <th className="text-left p-4 text-sm font-medium text-[#5a6b66]">角色</th>
                       <th className="text-left p-4 text-sm font-medium text-[#5a6b66]">状态</th>
@@ -112,25 +112,25 @@ export default function AdminUsersPage() {
                   </thead>
                   <tbody>
                     {filtered.map((user) => (
-                      <tr key={user.id} className="border-b border-[#e5e0d5] hover:bg-[#F5F1E9]/70 transition-colors">
+                      <tr key={user.id} className="border-b border-[#C7D2FE] hover:bg-[#F0F0FF]/70 transition-colors">
                         <td className="p-4">
                           <div className="flex items-center gap-3">
                             <Avatar className="h-8 w-8">
-                              <AvatarFallback className="text-xs bg-[#2C4A46]/10 text-[#2C4A46]">{user.name[0]}</AvatarFallback>
+                              <AvatarFallback className="text-xs bg-[#6366F1]/10 text-[#6366F1]">{user.name[0]}</AvatarFallback>
                             </Avatar>
                             <div>
-                              <p className="font-medium text-sm text-[#2C4A46]">{user.name}</p>
+                              <p className="font-medium text-sm text-[#6366F1]">{user.name}</p>
                               <p className="text-xs text-[#8a9490]">{user.email}</p>
                             </div>
                           </div>
                         </td>
                         <td className="p-4">
-                          <Badge className={`tag-elegant border-0 text-xs ${user.role === "ORGANIZER" ? "bg-[#2C4A46]/10 text-[#2C4A46]" : "bg-[#d4cfc5]/60 text-[#5a6b66]"}`}>
+                          <Badge className={`tag-elegant border-0 text-xs ${user.role === "ORGANIZER" ? "bg-[#6366F1]/10 text-[#6366F1]" : "bg-[#C7D2FE]/60 text-[#5a6b66]"}`}>
                             {user.role === "ORGANIZER" ? "主理人" : "用户"}
                           </Badge>
                         </td>
                         <td className="p-4">
-                          <Badge className={`tag-elegant border-0 text-xs ${user.status === "ACTIVE" ? "bg-[#2C4A46]/10 text-[#2C4A46]" : "bg-red-50 text-red-600"}`}>
+                          <Badge className={`tag-elegant border-0 text-xs ${user.status === "ACTIVE" ? "bg-[#6366F1]/10 text-[#6366F1]" : "bg-red-50 text-red-600"}`}>
                             {user.status === "ACTIVE" ? "正常" : "封禁"}
                           </Badge>
                         </td>
@@ -144,7 +144,7 @@ export default function AdminUsersPage() {
                                 <Ban className="h-4 w-4" />
                               </Button>
                             ) : (
-                              <Button variant="ghost" size="icon" className="h-8 w-8 text-[#2C4A46] hover:text-[#1e3632] hover:bg-[#2C4A46]/5">
+                              <Button variant="ghost" size="icon" className="h-8 w-8 text-[#6366F1] hover:text-[#1e3632] hover:bg-[#6366F1]/5">
                                 <CheckCircle2 className="h-4 w-4" />
                               </Button>
                             )}

@@ -56,14 +56,14 @@ export default function OPCPage() {
   return (
     <div className="min-h-screen bg-gradient-elegant">
       {/* Header */}
-      <div className="bg-[#2C4A46] text-white">
+      <div className="bg-[#6366F1] text-white">
         <div className="container-elegant py-12">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
               <h1 className="text-2xl font-bold">OPC 一人公司平台</h1>
-              <p className="text-[#F5F1E9]/80 mt-1 text-sm">展示个人品牌，提供专业服务</p>
+              <p className="text-[#F0F0FF]/80 mt-1 text-sm">展示个人品牌，提供专业服务</p>
             </div>
-            <button className="btn-secondary bg-[#F5F1E9] text-[#2C4A46] border-[#F5F1E9] hover:bg-white">
+            <button className="btn-secondary bg-[#F0F0FF] text-[#6366F1] border-[#F0F0FF] hover:bg-white">
               <Plus className="mr-2 h-4 w-4" />
               发布服务
             </button>
@@ -100,7 +100,7 @@ export default function OPCPage() {
 
           {/* Sidebar */}
           <div className="space-y-8">
-            <div className="card-elegant p-5 bg-[#F5F1E9]">
+            <div className="card-elegant p-5 bg-[#F0F0FF]">
               <CardHeader className="p-0 pb-2">
                 <CardTitle className="text-base font-semibold text-[#333]">成为服务者</CardTitle>
                 <CardDescription className="text-sm text-[#888]">发布你的专业技能，开始接单赚钱</CardDescription>
@@ -121,7 +121,7 @@ export default function OPCPage() {
                 {topProviders.map((provider, index) => (
                   <div key={index} className="flex items-center gap-3">
                     <Avatar className="h-10 w-10">
-                      <AvatarFallback className="bg-[#F5F1E9] text-[#2C4A46] text-sm">
+                      <AvatarFallback className="bg-[#F0F0FF] text-[#6366F1] text-sm">
                         {provider.name[0]}
                       </AvatarFallback>
                     </Avatar>
@@ -130,7 +130,7 @@ export default function OPCPage() {
                       <p className="text-xs text-[#888]">{provider.service}</p>
                     </div>
                     <div className="text-right">
-                      <div className="flex items-center gap-1 text-xs text-[#2C4A46]">
+                      <div className="flex items-center gap-1 text-xs text-[#6366F1]">
                         <Star className="h-3 w-3 fill-current" />
                         {provider.rating}
                       </div>
@@ -165,8 +165,8 @@ export default function OPCPage() {
 function StatCard({ icon: Icon, label, value }: { icon: any, label: string, value: string }) {
   return (
     <div className="card-elegant p-6 flex items-center gap-4">
-      <div className="w-12 h-12 bg-[#F5F1E9] rounded-xl flex items-center justify-center">
-        <Icon className="h-6 w-6 text-[#2C4A46]" />
+      <div className="w-12 h-12 bg-[#F0F0FF] rounded-xl flex items-center justify-center">
+        <Icon className="h-6 w-6 text-[#6366F1]" />
       </div>
       <div>
         <p className="text-2xl font-bold text-[#333]">{value}</p>
@@ -190,7 +190,7 @@ function ServiceCard({ service }: { service: any }) {
               <p className="text-sm text-[#888] mt-1">{service.description}</p>
             </div>
             <div className="text-right ml-4">
-              <p className="text-2xl font-bold text-[#2C4A46]">¥{service.price}</p>
+              <p className="text-2xl font-bold text-[#6366F1]">¥{service.price}</p>
               <p className="text-sm text-[#888]">/{service.unit}</p>
             </div>
           </div>
@@ -209,14 +209,14 @@ function ServiceCard({ service }: { service: any }) {
             <div className="flex items-center gap-2">
               <Avatar className="h-8 w-8">
                 <AvatarImage src={service.provider.avatar} />
-                <AvatarFallback className="text-xs bg-[#F5F1E9] text-[#2C4A46]">
+                <AvatarFallback className="text-xs bg-[#F0F0FF] text-[#6366F1]">
                   {service.provider.name[0]}
                 </AvatarFallback>
               </Avatar>
               <span className="text-sm text-[#888]">{service.provider.name}</span>
             </div>
             <div className="flex items-center gap-4 text-sm">
-              <div className="flex items-center gap-1 text-[#2C4A46]">
+              <div className="flex items-center gap-1 text-[#6366F1]">
                 <Star className="h-4 w-4 fill-current" />
                 <span>{service.rating}</span>
               </div>

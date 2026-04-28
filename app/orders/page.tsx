@@ -52,12 +52,12 @@ const orders = [
 ]
 
 const statusConfig: Record<string, { label: string; color: string; icon: any }> = {
-  PENDING: { label: "待付款", color: "bg-[#F5F1E9] text-[#2C4A46]", icon: Clock },
-  PAID: { label: "已付款", color: "bg-[#F5F1E9] text-[#2C4A46]", icon: CheckCircle2 },
-  SHIPPED: { label: "已发货", color: "bg-[#F5F1E9] text-[#2C4A46]", icon: Truck },
-  DELIVERED: { label: "已完成", color: "bg-[#2C4A46] text-white", icon: Package },
+  PENDING: { label: "待付款", color: "bg-[#F0F0FF] text-[#6366F1]", icon: Clock },
+  PAID: { label: "已付款", color: "bg-[#F0F0FF] text-[#6366F1]", icon: CheckCircle2 },
+  SHIPPED: { label: "已发货", color: "bg-[#F0F0FF] text-[#6366F1]", icon: Truck },
+  DELIVERED: { label: "已完成", color: "bg-[#6366F1] text-white", icon: Package },
   CANCELLED: { label: "已取消", color: "bg-gray-100 text-[#888]", icon: XCircle },
-  REFUNDING: { label: "退款中", color: "bg-[#F5F1E9] text-[#2C4A46]", icon: Clock },
+  REFUNDING: { label: "退款中", color: "bg-[#F0F0FF] text-[#6366F1]", icon: Clock },
   REFUNDED: { label: "已退款", color: "bg-gray-100 text-[#888]", icon: XCircle },
 }
 
@@ -119,8 +119,8 @@ export default function OrdersPage() {
                     <div className="space-y-3">
                       {order.items.map((item, index) => (
                         <div key={index} className="flex items-center gap-3">
-                          <div className="w-14 h-14 bg-[#F5F1E9] rounded-xl flex items-center justify-center shrink-0">
-                            <ShoppingBag className="h-6 w-6 text-[#2C4A46]/20" />
+                          <div className="w-14 h-14 bg-[#F0F0FF] rounded-xl flex items-center justify-center shrink-0">
+                            <ShoppingBag className="h-6 w-6 text-[#6366F1]/20" />
                           </div>
                           <div className="flex-1">
                             <p className="font-medium text-sm text-[#333]">{item.title}</p>
@@ -143,7 +143,7 @@ export default function OrdersPage() {
                         <span className="text-sm text-[#888]">
                           共 {order.items.reduce((s, i) => s + i.quantity, 0)} 件
                         </span>
-                        <span className="font-bold text-[#2C4A46]">¥{order.totalAmount.toFixed(2)}</span>
+                        <span className="font-bold text-[#6366F1]">¥{order.totalAmount.toFixed(2)}</span>
                       </div>
                     </div>
 
@@ -174,8 +174,8 @@ export default function OrdersPage() {
           </div>
         ) : (
           <div className="text-center py-20">
-            <div className="w-16 h-16 bg-[#F5F1E9] rounded-full flex items-center justify-center mx-auto mb-4">
-              <ShoppingBag className="h-8 w-8 text-[#2C4A46]/20" />
+            <div className="w-16 h-16 bg-[#F0F0FF] rounded-full flex items-center justify-center mx-auto mb-4">
+              <ShoppingBag className="h-8 w-8 text-[#6366F1]/20" />
             </div>
             <h3 className="text-lg font-semibold text-[#333]">暂无订单</h3>
             <p className="text-[#888] mt-1 text-sm">去商城逛逛吧</p>

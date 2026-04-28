@@ -22,9 +22,9 @@ import {
 
 // 支付方式
 const paymentMethods = [
-  { id: "wechat", name: "微信支付", icon: Smartphone, color: "text-[#2C4A46]", bgColor: "bg-[#F5F1E9]" },
-  { id: "alipay", name: "支付宝", icon: CreditCard, color: "text-[#2C4A46]", bgColor: "bg-[#F5F1E9]" },
-  { id: "balance", name: "余额支付", icon: Wallet, color: "text-[#2C4A46]", bgColor: "bg-[#F5F1E9]" },
+  { id: "wechat", name: "微信支付", icon: Smartphone, color: "text-[#6366F1]", bgColor: "bg-[#F0F0FF]" },
+  { id: "alipay", name: "支付宝", icon: CreditCard, color: "text-[#6366F1]", bgColor: "bg-[#F0F0FF]" },
+  { id: "balance", name: "余额支付", icon: Wallet, color: "text-[#6366F1]", bgColor: "bg-[#F0F0FF]" },
 ]
 
 // 模拟订单数据
@@ -54,8 +54,8 @@ export default function CheckoutPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-elegant">
         <div className="text-center max-w-md px-4">
-          <div className="w-20 h-20 bg-[#F5F1E9] rounded-full flex items-center justify-center mx-auto mb-6">
-            <CheckCircle2 className="h-10 w-10 text-[#2C4A46]" />
+          <div className="w-20 h-20 bg-[#F0F0FF] rounded-full flex items-center justify-center mx-auto mb-6">
+            <CheckCircle2 className="h-10 w-10 text-[#6366F1]" />
           </div>
           <h1 className="text-2xl font-bold mb-2 text-[#333]">支付成功！</h1>
           <p className="text-[#888] mb-6 text-sm">你的订单已支付成功，商品将很快交付</p>
@@ -67,7 +67,7 @@ export default function CheckoutPage() {
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-[#888]">支付金额</span>
-                <span className="font-bold text-[#2C4A46]">¥{totalAmount.toFixed(2)}</span>
+                <span className="font-bold text-[#6366F1]">¥{totalAmount.toFixed(2)}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-[#888]">支付方式</span>
@@ -92,13 +92,13 @@ export default function CheckoutPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-elegant">
         <div className="text-center max-w-md px-4">
-          <div className="w-20 h-20 bg-[#F5F1E9] rounded-full flex items-center justify-center mx-auto mb-6">
-            <Lock className="h-10 w-10 text-[#2C4A46]" />
+          <div className="w-20 h-20 bg-[#F0F0FF] rounded-full flex items-center justify-center mx-auto mb-6">
+            <Lock className="h-10 w-10 text-[#6366F1]" />
           </div>
           <h1 className="text-2xl font-bold mb-2 text-[#333]">支付处理中</h1>
           <p className="text-[#888] text-sm">请稍候，正在处理你的支付请求...</p>
           <div className="mt-6 flex justify-center">
-            <div className="w-8 h-8 border-4 border-[#2C4A46] border-t-transparent rounded-full animate-spin"></div>
+            <div className="w-8 h-8 border-4 border-[#6366F1] border-t-transparent rounded-full animate-spin"></div>
           </div>
         </div>
       </div>
@@ -111,7 +111,7 @@ export default function CheckoutPage() {
         {/* 步骤指示器 */}
         <div className="flex items-center justify-center gap-4 mb-10">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-[#2C4A46] text-white flex items-center justify-center text-sm">1</div>
+            <div className="w-8 h-8 rounded-full bg-[#6366F1] text-white flex items-center justify-center text-sm">1</div>
             <span className="font-medium text-sm text-[#333]">确认订单</span>
           </div>
           <div className="w-16 h-0.5 bg-gray-200"></div>
@@ -169,8 +169,8 @@ export default function CheckoutPage() {
                       onClick={() => setPaymentMethod(method.id)}
                       className={`p-4 rounded-xl border-2 flex items-center gap-3 transition-all ${
                         paymentMethod === method.id
-                          ? "border-[#2C4A46] bg-[#F5F1E9]"
-                          : "border-[#e5e5e5] hover:border-[#2C4A46]/30"
+                          ? "border-[#6366F1] bg-[#F0F0FF]"
+                          : "border-[#e5e5e5] hover:border-[#6366F1]/30"
                       }`}
                     >
                       <div className={`w-10 h-10 ${method.bgColor} rounded-lg flex items-center justify-center`}>
@@ -178,7 +178,7 @@ export default function CheckoutPage() {
                       </div>
                       <span className="font-medium text-sm text-[#333]">{method.name}</span>
                       {paymentMethod === method.id && (
-                        <CheckCircle2 className="h-5 w-5 text-[#2C4A46] ml-auto" />
+                        <CheckCircle2 className="h-5 w-5 text-[#6366F1] ml-auto" />
                       )}
                     </button>
                   ))}
@@ -187,10 +187,10 @@ export default function CheckoutPage() {
                 {/* 模拟支付二维码 */}
                 {paymentMethod === "wechat" && (
                   <div className="mt-8 text-center">
-                    <div className="w-48 h-48 bg-[#F5F1E9] rounded-xl mx-auto flex items-center justify-center border-2 border-dashed border-[#2C4A46]/20">
+                    <div className="w-48 h-48 bg-[#F0F0FF] rounded-xl mx-auto flex items-center justify-center border-2 border-dashed border-[#6366F1]/20">
                       <div className="text-center">
-                        <Smartphone className="h-12 w-12 text-[#2C4A46]/30 mx-auto mb-2" />
-                        <p className="text-sm text-[#2C4A46]">微信扫码支付</p>
+                        <Smartphone className="h-12 w-12 text-[#6366F1]/30 mx-auto mb-2" />
+                        <p className="text-sm text-[#6366F1]">微信扫码支付</p>
                       </div>
                     </div>
                     <p className="text-sm text-[#888] mt-3">请使用微信扫描二维码完成支付</p>
@@ -199,10 +199,10 @@ export default function CheckoutPage() {
 
                 {paymentMethod === "alipay" && (
                   <div className="mt-8 text-center">
-                    <div className="w-48 h-48 bg-[#F5F1E9] rounded-xl mx-auto flex items-center justify-center border-2 border-dashed border-[#2C4A46]/20">
+                    <div className="w-48 h-48 bg-[#F0F0FF] rounded-xl mx-auto flex items-center justify-center border-2 border-dashed border-[#6366F1]/20">
                       <div className="text-center">
-                        <CreditCard className="h-12 w-12 text-[#2C4A46]/30 mx-auto mb-2" />
-                        <p className="text-sm text-[#2C4A46]">支付宝扫码支付</p>
+                        <CreditCard className="h-12 w-12 text-[#6366F1]/30 mx-auto mb-2" />
+                        <p className="text-sm text-[#6366F1]">支付宝扫码支付</p>
                       </div>
                     </div>
                     <p className="text-sm text-[#888] mt-3">请使用支付宝扫描二维码完成支付</p>
@@ -223,8 +223,8 @@ export default function CheckoutPage() {
                 <div className="space-y-3">
                   {orderItems.map((item) => (
                     <div key={item.id} className="flex items-center gap-3">
-                      <div className="w-12 h-12 bg-[#F5F1E9] rounded-lg flex items-center justify-center shrink-0">
-                        <ShoppingBag className="h-5 w-5 text-[#2C4A46]/30" />
+                      <div className="w-12 h-12 bg-[#F0F0FF] rounded-lg flex items-center justify-center shrink-0">
+                        <ShoppingBag className="h-5 w-5 text-[#6366F1]/30" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium line-clamp-1 text-[#333]">{item.title}</p>
@@ -256,7 +256,7 @@ export default function CheckoutPage() {
 
                 <div className="flex justify-between items-center">
                   <span className="font-medium text-sm text-[#333]">应付金额</span>
-                  <span className="text-2xl font-bold text-[#2C4A46]">¥{totalAmount.toFixed(2)}</span>
+                  <span className="text-2xl font-bold text-[#6366F1]">¥{totalAmount.toFixed(2)}</span>
                 </div>
 
                 <button

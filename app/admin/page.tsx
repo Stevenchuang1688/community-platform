@@ -19,10 +19,10 @@ import {
 } from "lucide-react"
 
 const stats = [
-  { title: "总用户", value: "2,456", change: "+12.5%", up: true, icon: Users, color: "text-[#2C4A46]", bg: "bg-[#F5F1E9]" },
-  { title: "活动数量", value: "128", change: "+8.2%", up: true, icon: Calendar, color: "text-[#2C4A46]", bg: "bg-[#F5F1E9]" },
-  { title: "商城订单", value: "892", change: "+23.1%", up: true, icon: ShoppingBag, color: "text-[#2C4A46]", bg: "bg-[#F5F1E9]" },
-  { title: "总收入", value: "¥128,456", change: "+15.3%", up: true, icon: DollarSign, color: "text-[#2C4A46]", bg: "bg-[#F5F1E9]" },
+  { title: "总用户", value: "2,456", change: "+12.5%", up: true, icon: Users, color: "text-[#6366F1]", bg: "bg-[#F0F0FF]" },
+  { title: "活动数量", value: "128", change: "+8.2%", up: true, icon: Calendar, color: "text-[#6366F1]", bg: "bg-[#F0F0FF]" },
+  { title: "商城订单", value: "892", change: "+23.1%", up: true, icon: ShoppingBag, color: "text-[#6366F1]", bg: "bg-[#F0F0FF]" },
+  { title: "总收入", value: "¥128,456", change: "+15.3%", up: true, icon: DollarSign, color: "text-[#6366F1]", bg: "bg-[#F0F0FF]" },
 ]
 
 const recentActivities = [
@@ -48,14 +48,14 @@ const recentUsers = [
 
 export default function AdminPage() {
   return (
-    <div className="min-h-screen bg-[#F5F1E9]/30">
+    <div className="min-h-screen bg-[#F0F0FF]/30">
       {/* 侧边栏 + 主内容 */}
       <div className="flex">
         {/* 侧边栏 */}
         <aside className="hidden md:flex w-64 bg-white border-r flex-col h-screen sticky top-0">
           <div className="p-6 border-b">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-[#2C4A46] rounded-lg flex items-center justify-center text-white text-sm font-medium">社</div>
+              <div className="w-8 h-8 bg-[#6366F1] rounded-lg flex items-center justify-center text-white text-sm font-medium">社</div>
               <div>
                 <p className="font-bold text-sm text-[#333]">管理后台</p>
                 <p className="text-xs text-[#888]">社群主理人平台</p>
@@ -72,7 +72,7 @@ export default function AdminPage() {
             ].map((item) => (
               <Link key={item.href} href={item.href}>
                 <button className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${
-                  item.href === '/admin' ? 'bg-[#F5F1E9] text-[#2C4A46]' : 'hover:bg-[#F5F1E9]/50 hover:text-[#2C4A46] text-[#333]'
+                  item.href === '/admin' ? 'bg-[#F0F0FF] text-[#6366F1]' : 'hover:bg-[#F0F0FF]/50 hover:text-[#6366F1] text-[#333]'
                 }`}>
                   <item.icon className="h-4 w-4" />
                   {item.label}
@@ -122,7 +122,7 @@ export default function AdminPage() {
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-base font-semibold text-[#333]">最近活动</CardTitle>
                   <Link href="/admin/activities">
-                    <button className="text-sm text-[#2C4A46] hover:underline">查看全部</button>
+                    <button className="text-sm text-[#6366F1] hover:underline">查看全部</button>
                   </Link>
                 </div>
               </div>
@@ -148,7 +148,7 @@ export default function AdminPage() {
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-base font-semibold text-[#333]">最近订单</CardTitle>
                   <Link href="/admin/orders">
-                    <button className="text-sm text-[#2C4A46] hover:underline">查看全部</button>
+                    <button className="text-sm text-[#6366F1] hover:underline">查看全部</button>
                   </Link>
                 </div>
               </div>
@@ -174,14 +174,14 @@ export default function AdminPage() {
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-base font-semibold text-[#333]">新增用户</CardTitle>
                   <Link href="/admin/users">
-                    <button className="text-sm text-[#2C4A46] hover:underline">查看全部</button>
+                    <button className="text-sm text-[#6366F1] hover:underline">查看全部</button>
                   </Link>
                 </div>
               </div>
               <CardContent className="space-y-4">
                 {recentUsers.map((user, i) => (
                   <div key={i} className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-[#F5F1E9] rounded-full flex items-center justify-center text-[#2C4A46] text-sm font-medium">
+                    <div className="w-8 h-8 bg-[#F0F0FF] rounded-full flex items-center justify-center text-[#6366F1] text-sm font-medium">
                       {user.name[0]}
                     </div>
                     <div className="flex-1">
@@ -204,26 +204,26 @@ export default function AdminPage() {
               <CardContent>
                 <div className="grid grid-cols-2 gap-3">
                   <Link href="/admin/users">
-                    <button className="w-full h-20 flex flex-col items-center justify-center gap-2 rounded-xl border border-[#e5e5e5] hover:bg-[#F5F1E9] transition-colors">
-                      <UserPlus className="h-5 w-5 text-[#2C4A46]" />
+                    <button className="w-full h-20 flex flex-col items-center justify-center gap-2 rounded-xl border border-[#e5e5e5] hover:bg-[#F0F0FF] transition-colors">
+                      <UserPlus className="h-5 w-5 text-[#6366F1]" />
                       <span className="text-xs text-[#333]">用户管理</span>
                     </button>
                   </Link>
                   <Link href="/admin/activities">
-                    <button className="w-full h-20 flex flex-col items-center justify-center gap-2 rounded-xl border border-[#e5e5e5] hover:bg-[#F5F1E9] transition-colors">
-                      <Calendar className="h-5 w-5 text-[#2C4A46]" />
+                    <button className="w-full h-20 flex flex-col items-center justify-center gap-2 rounded-xl border border-[#e5e5e5] hover:bg-[#F0F0FF] transition-colors">
+                      <Calendar className="h-5 w-5 text-[#6366F1]" />
                       <span className="text-xs text-[#333]">活动审核</span>
                     </button>
                   </Link>
                   <Link href="/admin/orders">
-                    <button className="w-full h-20 flex flex-col items-center justify-center gap-2 rounded-xl border border-[#e5e5e5] hover:bg-[#F5F1E9] transition-colors">
-                      <Package className="h-5 w-5 text-[#2C4A46]" />
+                    <button className="w-full h-20 flex flex-col items-center justify-center gap-2 rounded-xl border border-[#e5e5e5] hover:bg-[#F0F0FF] transition-colors">
+                      <Package className="h-5 w-5 text-[#6366F1]" />
                       <span className="text-xs text-[#333]">订单处理</span>
                     </button>
                   </Link>
                   <Link href="/admin/stats">
-                    <button className="w-full h-20 flex flex-col items-center justify-center gap-2 rounded-xl border border-[#e5e5e5] hover:bg-[#F5F1E9] transition-colors">
-                      <TrendingUp className="h-5 w-5 text-[#2C4A46]" />
+                    <button className="w-full h-20 flex flex-col items-center justify-center gap-2 rounded-xl border border-[#e5e5e5] hover:bg-[#F0F0FF] transition-colors">
+                      <TrendingUp className="h-5 w-5 text-[#6366F1]" />
                       <span className="text-xs text-[#333]">数据报表</span>
                     </button>
                   </Link>

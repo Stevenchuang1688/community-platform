@@ -76,7 +76,7 @@ export default function ProductDetailPage() {
       <div className="container-elegant section-spacing">
         {/* 面包屑 */}
         <nav className="text-sm text-[#888] mb-8">
-          <Link href="/shop" className="hover:text-[#2C4A46]">商城</Link>
+          <Link href="/shop" className="hover:text-[#6366F1]">商城</Link>
           <span className="mx-2">/</span>
           <span className="text-[#333]">{product.category}</span>
           <span className="mx-2">/</span>
@@ -86,18 +86,18 @@ export default function ProductDetailPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           {/* 左侧：商品图片 */}
           <div className="space-y-4">
-            <div className="aspect-square bg-[#F5F1E9] rounded-2xl flex items-center justify-center relative overflow-hidden">
+            <div className="aspect-square bg-[#F0F0FF] rounded-2xl flex items-center justify-center relative overflow-hidden">
               {product.images[0] ? (
                 <img src={product.images[0]} alt={product.title} className="w-full h-full object-cover" />
               ) : (
                 <div className="text-center">
                   <div className="text-6xl mb-4 opacity-60">📚</div>
-                  <p className="text-[#2C4A46]/40 text-sm">{product.title}</p>
+                  <p className="text-[#6366F1]/40 text-sm">{product.title}</p>
                 </div>
               )}
               {discount > 0 && (
                 <div className="absolute top-4 left-4">
-                  <span className="bg-[#2C4A46] text-white text-sm px-3 py-1 rounded-full">-{discount}%</span>
+                  <span className="bg-[#6366F1] text-white text-sm px-3 py-1 rounded-full">-{discount}%</span>
                 </div>
               )}
             </div>
@@ -116,14 +116,14 @@ export default function ProductDetailPage() {
             </div>
 
             {/* 价格 */}
-            <div className="bg-[#F5F1E9] rounded-xl p-5">
+            <div className="bg-[#F0F0FF] rounded-xl p-5">
               <div className="flex items-baseline gap-3">
-                <span className="text-3xl font-bold text-[#2C4A46]">¥{product.price}</span>
+                <span className="text-3xl font-bold text-[#6366F1]">¥{product.price}</span>
                 {product.originalPrice && (
                   <span className="text-base text-[#888] line-through">¥{product.originalPrice}</span>
                 )}
                 {discount > 0 && (
-                  <span className="tag-elegant" style={{ backgroundColor: '#2C4A46', color: '#F5F1E9' }}>
+                  <span className="tag-elegant" style={{ backgroundColor: '#6366F1', color: '#F0F0FF' }}>
                     省 ¥{product.originalPrice! - product.price}
                   </span>
                 )}
@@ -131,7 +131,7 @@ export default function ProductDetailPage() {
               <div className="flex items-center gap-4 mt-2 text-sm text-[#888]">
                 <span>已售 {product.sales}</span>
                 <span>库存 {product.stock}</span>
-                <div className="flex items-center gap-1 text-[#2C4A46]">
+                <div className="flex items-center gap-1 text-[#6366F1]">
                   <Star className="h-4 w-4 fill-current" />
                   {product.rating} ({product.reviews}评价)
                 </div>
@@ -141,7 +141,7 @@ export default function ProductDetailPage() {
             {/* 卖家信息 */}
             <div className="flex items-center gap-3 p-4 card-elegant">
               <Avatar className="h-10 w-10">
-                <AvatarFallback className="bg-[#F5F1E9] text-[#2C4A46]">{product.seller.name[0]}</AvatarFallback>
+                <AvatarFallback className="bg-[#F0F0FF] text-[#6366F1]">{product.seller.name[0]}</AvatarFallback>
               </Avatar>
               <div className="flex-1">
                 <p className="font-medium text-sm text-[#333]">{product.seller.name}</p>
@@ -156,19 +156,19 @@ export default function ProductDetailPage() {
               <div className="flex items-center border rounded-xl overflow-hidden border-[#e5e5e5]">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-10 h-10 flex items-center justify-center hover:bg-[#F5F1E9] transition-colors"
+                  className="w-10 h-10 flex items-center justify-center hover:bg-[#F0F0FF] transition-colors"
                 >
                   <Minus className="h-4 w-4" />
                 </button>
                 <span className="w-12 h-10 flex items-center justify-center border-x border-[#e5e5e5] font-medium text-sm">{quantity}</span>
                 <button
                   onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
-                  className="w-10 h-10 flex items-center justify-center hover:bg-[#F5F1E9] transition-colors"
+                  className="w-10 h-10 flex items-center justify-center hover:bg-[#F0F0FF] transition-colors"
                 >
                   <Plus className="h-4 w-4" />
                 </button>
               </div>
-              <span className="text-sm text-[#888]">小计: <span className="text-[#2C4A46] font-bold">¥{(product.price * quantity).toFixed(2)}</span></span>
+              <span className="text-sm text-[#888]">小计: <span className="text-[#6366F1] font-bold">¥{(product.price * quantity).toFixed(2)}</span></span>
             </div>
 
             {/* 操作按钮 */}
@@ -200,15 +200,15 @@ export default function ProductDetailPage() {
             {/* 服务保障 */}
             <div className="grid grid-cols-3 gap-4 p-4 card-elegant">
               <div className="flex items-center gap-2 text-sm text-[#888]">
-                <Shield className="h-4 w-4 text-[#2C4A46]" />
+                <Shield className="h-4 w-4 text-[#6366F1]" />
                 <span>正品保障</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-[#888]">
-                <Truck className="h-4 w-4 text-[#2C4A46]" />
+                <Truck className="h-4 w-4 text-[#6366F1]" />
                 <span>极速发货</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-[#888]">
-                <RotateCcw className="h-4 w-4 text-[#2C4A46]" />
+                <RotateCcw className="h-4 w-4 text-[#6366F1]" />
                 <span>7天退款</span>
               </div>
             </div>
@@ -220,13 +220,13 @@ export default function ProductDetailPage() {
           <div className="flex gap-6 border-b mb-8">
             <button
               onClick={() => setActiveTab("detail")}
-              className={`pb-3 text-base font-medium border-b-2 transition-colors ${activeTab === "detail" ? "border-[#2C4A46] text-[#2C4A46]" : "border-transparent text-[#888] hover:text-[#333]"}`}
+              className={`pb-3 text-base font-medium border-b-2 transition-colors ${activeTab === "detail" ? "border-[#6366F1] text-[#6366F1]" : "border-transparent text-[#888] hover:text-[#333]"}`}
             >
               商品详情
             </button>
             <button
               onClick={() => setActiveTab("reviews")}
-              className={`pb-3 text-base font-medium border-b-2 transition-colors ${activeTab === "reviews" ? "border-[#2C4A46] text-[#2C4A46]" : "border-transparent text-[#888] hover:text-[#333]"}`}
+              className={`pb-3 text-base font-medium border-b-2 transition-colors ${activeTab === "reviews" ? "border-[#6366F1] text-[#6366F1]" : "border-transparent text-[#888] hover:text-[#333]"}`}
             >
               用户评价 ({product.reviews})
             </button>
@@ -241,7 +241,7 @@ export default function ProductDetailPage() {
                 <ul className="space-y-3">
                   {product.features.map((feature, index) => (
                     <li key={index} className="flex items-start gap-3">
-                      <CheckCircle2 className="h-5 w-5 text-[#2C4A46] mt-0.5 shrink-0" />
+                      <CheckCircle2 className="h-5 w-5 text-[#6366F1] mt-0.5 shrink-0" />
                       <span className="text-sm text-[#333]">{feature}</span>
                     </li>
                   ))}
@@ -255,14 +255,14 @@ export default function ProductDetailPage() {
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
                       <Avatar className="h-8 w-8">
-                        <AvatarFallback className="text-xs bg-[#F5F1E9] text-[#2C4A46]">{review.user[0]}</AvatarFallback>
+                        <AvatarFallback className="text-xs bg-[#F0F0FF] text-[#6366F1]">{review.user[0]}</AvatarFallback>
                       </Avatar>
                       <span className="font-medium text-sm text-[#333]">{review.user}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <div className="flex">
                         {Array.from({ length: 5 }).map((_, i) => (
-                          <Star key={i} className={`h-3.5 w-3.5 ${i < review.rating ? 'text-[#2C4A46] fill-current' : 'text-gray-300'}`} />
+                          <Star key={i} className={`h-3.5 w-3.5 ${i < review.rating ? 'text-[#6366F1] fill-current' : 'text-gray-300'}`} />
                         ))}
                       </div>
                       <span className="text-xs text-[#888]">{review.date}</span>

@@ -132,15 +132,15 @@ export default function ShopPage() {
   return (
     <div className="min-h-screen bg-gradient-elegant">
       {/* Header */}
-      <div className="bg-[#2C4A46] text-white">
+      <div className="bg-[#6366F1] text-white">
         <div className="container-elegant py-12">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
               <h1 className="text-2xl font-bold">精选商城</h1>
-              <p className="text-[#F5F1E9]/80 mt-1 text-sm">为主理人精选的工具、课程和服务</p>
+              <p className="text-[#F0F0FF]/80 mt-1 text-sm">为主理人精选的工具、课程和服务</p>
             </div>
             <Link href="/cart">
-              <button className="btn-secondary bg-[#F5F1E9] text-[#2C4A46] border-[#F5F1E9] hover:bg-white">
+              <button className="btn-secondary bg-[#F0F0FF] text-[#6366F1] border-[#F0F0FF] hover:bg-white">
                 <ShoppingCart className="mr-2 h-4 w-4" />
                 购物车
               </button>
@@ -151,12 +151,12 @@ export default function ShopPage() {
 
       <div className="container-elegant section-spacing">
         {/* Banner */}
-        <div className="card-elegant mb-10 bg-[#F5F1E9] overflow-hidden">
+        <div className="card-elegant mb-10 bg-[#F0F0FF] overflow-hidden">
           <div className="p-6 flex flex-col md:flex-row items-center gap-6">
             <div className="flex-1">
               <span className="tag-elegant mb-2 inline-block">限时特惠</span>
               <h2 className="text-2xl font-bold mb-2 text-[#333]">新用户专享</h2>
-              <p className="text-[#888] text-sm">首次购买任意商品享受8折优惠，使用优惠码: <span className="font-mono font-bold text-[#2C4A46]">NEW2026</span></p>
+              <p className="text-[#888] text-sm">首次购买任意商品享受8折优惠，使用优惠码: <span className="font-mono font-bold text-[#6366F1]">NEW2026</span></p>
             </div>
             <div className="text-5xl opacity-80">🎁</div>
           </div>
@@ -193,7 +193,7 @@ export default function ShopPage() {
           </div>
         ) : (
           <div className="text-center py-20">
-            <div className="w-16 h-16 bg-[#F5F1E9] rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-16 h-16 bg-[#F0F0FF] rounded-full flex items-center justify-center mx-auto mb-4">
               <Search className="h-8 w-8 text-[#888]" />
             </div>
             <h3 className="text-lg font-semibold text-[#333]">没有找到相关商品</h3>
@@ -214,17 +214,17 @@ function ProductCard({ product }: { product: any }) {
     <Link href={`/shop/product/${product.id}`}>
       <div className="card-elegant overflow-hidden cursor-pointer group h-full">
         {/* Image */}
-        <div className="aspect-square bg-[#F5F1E9] relative overflow-hidden">
+        <div className="aspect-square bg-[#F0F0FF] relative overflow-hidden">
           {product.images[0] ? (
             <img src={product.images[0]} alt={product.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
           ) : (
             <div className="w-full h-full flex items-center justify-center">
-              <ShoppingBag className="h-16 w-16 text-[#2C4A46]/15" />
+              <ShoppingBag className="h-16 w-16 text-[#6366F1]/15" />
             </div>
           )}
           {discount > 0 && (
             <div className="absolute top-3 left-3">
-              <span className="bg-[#2C4A46] text-white text-xs px-2 py-1 rounded-full">-{discount}%</span>
+              <span className="bg-[#6366F1] text-white text-xs px-2 py-1 rounded-full">-{discount}%</span>
             </div>
           )}
           <button className="absolute top-3 right-3 w-8 h-8 bg-white/80 rounded-full flex items-center justify-center hover:bg-white transition-colors">
@@ -234,7 +234,7 @@ function ProductCard({ product }: { product: any }) {
 
         {/* Info */}
         <div className="p-4">
-          <h3 className="font-semibold text-sm line-clamp-2 group-hover:text-[#2C4A46] transition-colors text-[#333]">
+          <h3 className="font-semibold text-sm line-clamp-2 group-hover:text-[#6366F1] transition-colors text-[#333]">
             {product.title}
           </h3>
           <p className="text-xs text-[#888] mt-1 line-clamp-1">{product.description}</p>
@@ -247,12 +247,12 @@ function ProductCard({ product }: { product: any }) {
 
           <div className="flex items-end justify-between mt-3">
             <div>
-              <span className="text-xl font-bold text-[#2C4A46]">¥{product.price}</span>
+              <span className="text-xl font-bold text-[#6366F1]">¥{product.price}</span>
               {product.originalPrice && (
                 <span className="text-xs text-[#888] line-through ml-2">¥{product.originalPrice}</span>
               )}
             </div>
-            <div className="flex items-center gap-1 text-[#2C4A46] text-sm">
+            <div className="flex items-center gap-1 text-[#6366F1] text-sm">
               <Star className="h-3.5 w-3.5 fill-current" />
               {product.rating}
             </div>
@@ -263,7 +263,7 @@ function ProductCard({ product }: { product: any }) {
           <div className="flex items-center justify-between mt-3">
             <div className="flex items-center gap-2">
               <Avatar className="h-5 w-5">
-                <AvatarFallback className="text-xs bg-[#F5F1E9] text-[#2C4A46]">
+                <AvatarFallback className="text-xs bg-[#F0F0FF] text-[#6366F1]">
                   {product.seller.name[0]}
                 </AvatarFallback>
               </Avatar>

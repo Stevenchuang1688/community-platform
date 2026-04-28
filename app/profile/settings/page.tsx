@@ -38,9 +38,9 @@ export default function ProfileSettingsPage() {
             <div className="flex items-center gap-6">
               <div className="relative">
                 <Avatar className="h-24 w-24">
-                  <AvatarFallback className="text-2xl bg-[#2C4A46] text-white">S</AvatarFallback>
+                  <AvatarFallback className="text-2xl bg-[#6366F1] text-white">S</AvatarFallback>
                 </Avatar>
-                <button className="absolute bottom-0 right-0 w-8 h-8 bg-[#2C4A46] text-white rounded-full flex items-center justify-center shadow-lg hover:bg-[#1f3633] transition-colors">
+                <button className="absolute bottom-0 right-0 w-8 h-8 bg-[#6366F1] text-white rounded-full flex items-center justify-center shadow-lg hover:bg-[#4F46E5] transition-colors">
                   <Camera className="h-4 w-4" />
                 </button>
               </div>
@@ -147,7 +147,7 @@ export default function ProfileSettingsPage() {
                     {tag} ×
                   </span>
                 ))}
-                <span className="tag-elegant cursor-pointer hover:opacity-70" style={{ backgroundColor: 'transparent', border: '1px dashed #2C4A46' }}>
+                <span className="tag-elegant cursor-pointer hover:opacity-70" style={{ backgroundColor: 'transparent', border: '1px dashed #6366F1' }}>
                   + 添加标签
                 </span>
               </div>

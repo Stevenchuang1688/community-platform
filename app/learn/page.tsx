@@ -50,10 +50,10 @@ export default function LearnPage() {
   return (
     <div className="min-h-screen bg-gradient-elegant">
       {/* Header */}
-      <div className="bg-[#2C4A46] text-white">
+      <div className="bg-[#6366F1] text-white">
         <div className="container-elegant py-12">
           <h1 className="text-2xl font-bold">学习专区</h1>
-          <p className="text-[#F5F1E9]/80 mt-1 text-sm">知识分享，共同成长</p>
+          <p className="text-[#F0F0FF]/80 mt-1 text-sm">知识分享，共同成长</p>
         </div>
       </div>
 
@@ -92,7 +92,7 @@ export default function LearnPage() {
               ))}
             </div>
 
-            <div className="card-elegant p-5 bg-[#F5F1E9]">
+            <div className="card-elegant p-5 bg-[#F0F0FF]">
               <CardHeader className="p-0 pb-2">
                 <CardTitle className="text-base font-semibold text-[#333]">创建学习小组</CardTitle>
                 <CardDescription className="text-sm text-[#888]">发起一个学习主题，找到志同道合的伙伴</CardDescription>
@@ -114,8 +114,8 @@ export default function LearnPage() {
 function StatCard({ icon: Icon, label, value }: { icon: any, label: string, value: string }) {
   return (
     <div className="card-elegant p-6 flex items-center gap-4">
-      <div className="w-12 h-12 bg-[#F5F1E9] rounded-xl flex items-center justify-center">
-        <Icon className="h-6 w-6 text-[#2C4A46]" />
+      <div className="w-12 h-12 bg-[#F0F0FF] rounded-xl flex items-center justify-center">
+        <Icon className="h-6 w-6 text-[#6366F1]" />
       </div>
       <div>
         <p className="text-2xl font-bold text-[#333]">{value}</p>
@@ -129,8 +129,8 @@ function CourseCard({ course }: { course: any }) {
   return (
     <div className="card-elegant overflow-hidden">
       <div className="flex flex-col sm:flex-row">
-        <div className="sm:w-48 h-32 sm:h-auto bg-[#F5F1E9] flex items-center justify-center">
-          <PlayCircle className="h-12 w-12 text-[#2C4A46]/20" />
+        <div className="sm:w-48 h-32 sm:h-auto bg-[#F0F0FF] flex items-center justify-center">
+          <PlayCircle className="h-12 w-12 text-[#6366F1]/20" />
         </div>
         <div className="flex-1 p-5">
           <div className="flex items-start justify-between">
@@ -144,7 +144,7 @@ function CourseCard({ course }: { course: any }) {
             <div className="flex items-center gap-2">
               <Avatar className="h-6 w-6">
                 <AvatarImage src={course.instructor.avatar} />
-                <AvatarFallback className="text-xs bg-[#F5F1E9] text-[#2C4A46]">
+                <AvatarFallback className="text-xs bg-[#F0F0FF] text-[#6366F1]">
                   {course.instructor.name[0]}
                 </AvatarFallback>
               </Avatar>
