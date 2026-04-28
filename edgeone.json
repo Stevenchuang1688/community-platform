@@ -1,12 +1,12 @@
 {
   "name": "community-platform",
-  "buildCommand": "npx prisma generate && npm run build",
+  "buildCommand": "npx prisma generate && next build",
   "installCommand": "npm install",
-  "outputDirectory": "./.next",
+  "outputDirectory": "./.next/standalone",
   "nodeVersion": "22.11.0",
   "env": {
-    "DATABASE_URL": "",
-    "NEXTAUTH_SECRET": "",
+    "DATABASE_URL": "postgresql://neondb_owner:npg_VOusCzWBN7e9@ep-autumn-night-ao2120xn-pooler.c-2.ap-southeast-1.aws.neon.tech/neondb?sslmode=require",
+    "NEXTAUTH_SECRET": "OQ6xF0GUPgY83Gr8iw8SiCe2rLkAItPybmwy0hRGPiQ=",
     "NEXTAUTH_URL": "",
     "APP_NAME": "社群主理人平台",
     "APP_DESCRIPTION": "连接主理人，发现精彩活动"
@@ -15,6 +15,7 @@
     "nodejs": {
       "externalNodeModules": [
         "@prisma/client",
+        "@prisma/engines",
         "bcryptjs",
         "jsonwebtoken"
       ],
