@@ -1,9 +1,16 @@
 {
   "name": "community-platform",
-  "buildCommand": "npm run build",
+  "buildCommand": "npx prisma generate && npm run build",
   "installCommand": "npm install",
   "outputDirectory": "./.next",
   "nodeVersion": "22.11.0",
+  "env": {
+    "DATABASE_URL": "",
+    "NEXTAUTH_SECRET": "",
+    "NEXTAUTH_URL": "",
+    "APP_NAME": "社群主理人平台",
+    "APP_DESCRIPTION": "连接主理人，发现精彩活动"
+  },
   "cloudFunctions": {
     "nodejs": {
       "externalNodeModules": [
