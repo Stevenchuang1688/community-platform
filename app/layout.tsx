@@ -9,8 +9,8 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "社群主理人平台 - 连接主理人，发现精彩活动",
-  description: "发布活动、展示自我、学习成长、交友互动、技能互换、OPC平台 - 一站式社群运营解决方案",
+  title: "谦懋乐享潮汕社群联盟 - 以个体链接城市",
+  description: "汇聚本地主理人，共建社群商业新生态。活动发布、技能互换、学习成长、OPC一人公司平台。",
 }
 
 export default function RootLayout({
@@ -23,17 +23,32 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col font-sans">
         <Navbar />
         <main className="flex-1">{children}</main>
-        <footer className="border-t py-8 bg-muted/30">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-2">
-                <div className="w-6 h-6 bg-gradient-to-br from-orange-400 to-red-500 rounded flex items-center justify-center text-white text-xs">
-                  社
+        
+        {/* 简化页脚 */}
+        <footer className="border-t border-gray-100 py-10 bg-white">
+          <div className="container-elegant">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              {/* Logo + 简介 */}
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-medium" style={{ backgroundColor: '#2C4A46' }}>
+                  谦
                 </div>
-                <span className="font-semibold">社群主理人平台</span>
+                <div>
+                  <p className="font-semibold text-gray-900 text-sm">谦懋乐享潮汕社群联盟</p>
+                  <p className="text-xs text-gray-500">以个体链接城市</p>
+                </div>
               </div>
-              <p className="text-sm text-muted-foreground">
-                © 2026 社群主理人平台. All rights reserved.
+              
+              {/* 联系方式 */}
+              <div className="flex items-center gap-6 text-sm text-gray-500">
+                <span>联系我们：contact@qmlx.club</span>
+                <span className="hidden md:inline">|</span>
+                <span>微信：qmlx2024</span>
+              </div>
+              
+              {/* 版权 */}
+              <p className="text-xs text-gray-400">
+                © 2026 谦懋乐享. All rights reserved.
               </p>
             </div>
           </div>
