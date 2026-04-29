@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
@@ -10,15 +10,9 @@ import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import {
-  CreditCard,
-  Smartphone,
-  Wallet,
-  Shield,
-  ArrowLeft,
-  CheckCircle2,
-  Lock,
-  ShoppingBag,
+  CreditCard, Smartphone, Wallet, Shield, ArrowLeft, CheckCircle2, Lock, ShoppingBag,
 } from "lucide-react"
+import { apiGet, apiPost, apiPut } from "@/lib/api-client"
 
 // 支付方式
 const paymentMethods = [
@@ -38,16 +32,54 @@ export default function CheckoutPage() {
   const [paymentMethod, setPaymentMethod] = useState("wechat")
   const [loading, setLoading] = useState(false)
   const [step, setStep] = useState<"checkout" | "paying" | "success">("checkout")
+  const [cartItems, setCartItems] = useState<any[]>([])
+  const [receiverName, setReceiverName] = useState("")
+  const [receiverPhone, setReceiverPhone] = useState("")
+  const [receiverAddress, setReceiverAddress] = useState("")
 
-  const totalAmount = orderItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
-  const totalItems = orderItems.reduce((sum, item) => sum + item.quantity, 0)
+  useEffect(() => {
+    apiGet("/api/shop/cart").then((res) => {
+      if (res.success && res.cartItems) {
+        setCartItems(res.cartItems.filter((i: any) => i.selected !== false))
+      }
+    }).catch(() => {})
+  }, [])
+
+  const totalAmount = cartItems.reduce((sum, item) => sum + (item.product?.price || 0) * item.quantity, 0)
+  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0)
 
   const handlePay = async () => {
+    if (!cartItems.length) { alert("购物车为空"); return }
     setLoading(true)
     setStep("paying")
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-    setStep("success")
-    setLoading(false)
+    try {
+      const cartItemIds = cartItems.map((i) => i.id)
+      const payMethod = paymentMethod === "wechat" ? "WECHAT" : paymentMethod === "alipay" ? "ALIPAY" : "BALANCE"
+      const res = await apiPost("/api/shop/orders", {
+        cartItemIds,
+        receiverName,
+        receiverPhone,
+        receiverAddress,
+        payMethod,
+      })
+      if (res.success) {
+        // 模拟支付延迟
+        await new Promise((resolve) => setTimeout(resolve, 1500))
+        // 更新订单状态为已支付
+        if (res.order?.id) {
+          await apiPut(`/api/shop/orders/${res.order.id}`, { status: "PAID", transactionId: "SIM_" + Date.now() })
+        }
+        setStep("success")
+      } else {
+        alert(res.message || "创建订单失败")
+        setStep("checkout")
+      }
+    } catch {
+      alert("网络错误")
+      setStep("checkout")
+    } finally {
+      setLoading(false)
+    }
   }
 
   if (step === "success") {

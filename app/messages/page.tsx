@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -9,6 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
+import { apiGet, apiPost } from "@/lib/api-client"
 import {
   MessageCircle,
   Send,
@@ -86,6 +87,20 @@ export default function MessagesPage() {
   )
 
   const activeConversation = conversations.find((c) => c.id === selectedChat)
+
+  const handleSendMessage = async () => {
+    if (!message.trim() || !activeConversation) return
+    const msgContent = message.trim()
+    const targetUserId = (activeConversation as any).userId || activeConversation.id
+    setMessage("")
+    try {
+      if (targetUserId) {
+        await apiPost(`/api/messages/${targetUserId}`, { content: msgContent })
+      }
+    } catch (err) {
+      console.error("Send message error:", err)
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gradient-elegant">
@@ -225,14 +240,14 @@ export default function MessagesPage() {
                       className="flex-1 input-elegant"
                       onKeyDown={(e) => {
                         if (e.key === "Enter" && message.trim()) {
-                          setMessage("")
+                          handleSendMessage()
                         }
                       }}
                     />
                     <button
                       className="btn-primary h-9 w-9 !px-0 shrink-0"
                       disabled={!message.trim()}
-                      onClick={() => setMessage("")}
+                      onClick={handleSendMessage}
                     >
                       <Send className="h-4 w-4" />
                     </button>

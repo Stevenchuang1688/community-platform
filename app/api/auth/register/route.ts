@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 import bcrypt from "bcryptjs"
-import jwt from "jsonwebtoken"
-
-const JWT_SECRET = process.env.NEXTAUTH_SECRET || "community-platform-secret-key"
+import { signToken, COOKIE_OPTIONS } from "@/lib/auth"
 
 export async function POST(request: Request) {
   try {
@@ -45,13 +43,9 @@ export async function POST(request: Request) {
     })
 
     // 生成 JWT
-    const token = jwt.sign(
-      { userId: user.id, email: user.email, role: user.role },
-      JWT_SECRET,
-      { expiresIn: "7d" }
-    )
+    const token = signToken({ userId: user.id, email: user.email, role: user.role })
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       success: true,
       token,
       user: {
@@ -62,6 +56,11 @@ export async function POST(request: Request) {
         role: user.role,
       },
     })
+
+    // 设置 httpOnly cookie
+    response.cookies.set("token", token, COOKIE_OPTIONS)
+
+    return response
   } catch (error) {
     console.error("Register error:", error)
     return NextResponse.json({ success: false, message: "注册失败，请重试" }, { status: 500 })

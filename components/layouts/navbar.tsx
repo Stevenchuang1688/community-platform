@@ -45,7 +45,10 @@ export function Navbar() {
     }
   }, [])
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/auth/logout", { method: "POST" })
+    } catch {}
     localStorage.removeItem("token")
     localStorage.removeItem("user")
     setUser(null)

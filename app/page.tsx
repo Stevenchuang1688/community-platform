@@ -1,31 +1,20 @@
+"use client"
+
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Calendar, MapPin, Users, ArrowRight, Lightbulb, Sparkles, Zap, BookOpen, Briefcase } from "lucide-react"
+import { apiGet } from "@/lib/api-client"
 
-const featuredActivities = [
-  {
-    id: "1", title: "周末桌游社交局", description: "欢迎喜欢桌游的朋友一起来玩，新手友好！",
-    coverImage: "", type: "OFFLINE", startTime: new Date("2026-05-01T14:00:00"),
-    location: "深圳市南山区", maxParticipants: 12, registrations: 8,
-    organizer: { name: "小明", avatar: "" }, tags: ["桌游", "社交"],
-  },
-  {
-    id: "2", title: "AI绘画入门分享会", description: "从零开始学习 Midjourney 和 Stable Diffusion",
-    coverImage: "", type: "ONLINE", startTime: new Date("2026-05-03T20:00:00"),
-    location: null, maxParticipants: 100, registrations: 56,
-    organizer: { name: "设计师阿杰", avatar: "" }, tags: ["AI", "设计"],
-  },
-  {
-    id: "3", title: "创业者下午茶", description: "轻松聊聊创业路上的故事和经验",
-    coverImage: "", type: "OFFLINE", startTime: new Date("2026-05-05T15:00:00"),
-    location: "深圳市福田区", maxParticipants: 8, registrations: 5,
-    organizer: { name: "Steven", avatar: "" }, tags: ["创业", "交流"],
-  },
+const defaultActivities = [
+  { id: "1", title: "周末桌游社交局", description: "欢迎喜欢桌游的朋友一起来玩，新手友好！", coverImage: "", type: "OFFLINE", startTime: "2026-05-01T14:00:00", location: "深圳市南山区", maxParticipants: 12, _count: { registrations: 8 }, organizer: { name: "小明", avatar: "" } },
+  { id: "2", title: "AI绘画入门分享会", description: "从零开始学习 Midjourney 和 Stable Diffusion", coverImage: "", type: "ONLINE", startTime: "2026-05-03T20:00:00", location: null, maxParticipants: 100, _count: { registrations: 56 }, organizer: { name: "设计师阿杰", avatar: "" } },
+  { id: "3", title: "创业者下午茶", description: "轻松聊聊创业路上的故事和经验", coverImage: "", type: "OFFLINE", startTime: "2026-05-05T15:00:00", location: "深圳市福田区", maxParticipants: 8, _count: { registrations: 5 }, organizer: { name: "Steven", avatar: "" } },
 ]
 
-const skillExchanges = [
+const defaultSkills = [
   { from: "教 Python", to: "学吉他", user: "程序员小李" },
   { from: "教摄影", to: "学英语", user: "摄影师阿华" },
   { from: "教烘焙", to: "学插花", user: "烘焙师小美" },
@@ -39,6 +28,29 @@ const features = [
 ]
 
 export default function HomePage() {
+  const [activities, setActivities] = useState(defaultActivities)
+  const [skills, setSkills] = useState(defaultSkills)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    Promise.all([
+      apiGet("/api/activities?limit=3").catch(() => null),
+      apiGet("/api/skills?limit=6").catch(() => null),
+    ]).then(([actRes, skillRes]) => {
+      if (actRes?.success && actRes.activities?.length) setActivities(actRes.activities)
+      if (skillRes?.success && skillRes.skills?.length) {
+        // 将 userSkills 转换为简化格式用于展示
+        const simplified = skillRes.skills.slice(0, 3).map((s: any) => ({
+          from: s.type === "TEACH" ? `教 ${s.skill?.name || s.skillId}` : `学 ${s.skill?.name || s.skillId}`,
+          to: s.type === "TEACH" ? "想学新技能" : "有一技之长",
+          user: s.user?.name || "匿名用户",
+        }))
+        if (simplified.length) setSkills(simplified)
+      }
+      setLoading(false)
+    })
+  }, [])
+
   return (
     <div className="min-h-screen bg-[#FAFBFF]">
       {/* Hero */}
@@ -50,7 +62,6 @@ export default function HomePage() {
                 <Sparkles className="h-3.5 w-3.5" />
                 已有 1,200+ 位主理人加入
               </div>
-              
               <div className="space-y-4">
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
                   汇聚本地主理人
@@ -63,22 +74,15 @@ export default function HomePage() {
                   在这里发现同频的人，一起做有意义的事。
                 </p>
               </div>
-              
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/register">
-                  <Button className="btn-cta text-base px-8 py-3">
-                    <Zap className="h-4 w-4 mr-1" />
-                    立即入驻
-                  </Button>
+                  <Button className="btn-cta text-base px-8 py-3"><Zap className="h-4 w-4 mr-1" />立即入驻</Button>
                 </Link>
                 <Link href="/activities">
-                  <Button className="btn-secondary text-base px-8 py-3">
-                    了解联盟
-                  </Button>
+                  <Button className="btn-secondary text-base px-8 py-3">了解联盟</Button>
                 </Link>
               </div>
             </div>
-            
             <div className="relative hidden lg:block">
               <div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-gradient-to-br from-[#6366F1]/10 to-[#F0F0FF]">
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -135,7 +139,7 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredActivities.map((activity) => (
+            {activities.map((activity: any) => (
               <ActivityCard key={activity.id} activity={activity} />
             ))}
           </div>
@@ -152,7 +156,7 @@ export default function HomePage() {
             <p className="text-gray-500 text-sm">用你擅长的技能，换取想学的技能</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-4xl mx-auto">
-            {skillExchanges.map((exchange, index) => (
+            {skills.map((exchange: any, index: number) => (
               <div key={index} className="card-elegant p-6 text-center">
                 <div className="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-4 bg-[#F0F0FF]">
                   <Lightbulb className="h-5 w-5 text-[#6366F1]" />
@@ -177,14 +181,9 @@ export default function HomePage() {
         <div className="container-elegant">
           <div className="max-w-2xl mx-auto text-center text-white">
             <h2 className="text-2xl md:text-3xl font-bold mb-4">成为主理人，开启你的社群之旅</h2>
-            <p className="text-white/70 text-base mb-8">
-              无论你是想组织活动、分享技能，还是建立个人品牌，这里都是你的最佳起点
-            </p>
+            <p className="text-white/70 text-base mb-8">无论你是想组织活动、分享技能，还是建立个人品牌，这里都是你的最佳起点</p>
             <Link href="/register">
-              <Button className="btn-cta text-base px-8 py-3">
-                <Zap className="h-4 w-4 mr-1" />
-                立即开始
-              </Button>
+              <Button className="btn-cta text-base px-8 py-3"><Zap className="h-4 w-4 mr-1" />立即开始</Button>
             </Link>
           </div>
         </div>
@@ -194,8 +193,12 @@ export default function HomePage() {
 }
 
 function ActivityCard({ activity }: { activity: any }) {
+  const regCount = activity._count?.registrations ?? activity.registrations ?? 0
+  const maxP = activity.maxParticipants ?? "不限"
+  const startTime = new Date(activity.startTime)
+
   return (
-    <Link href="/activities">
+    <Link href={`/activities/${activity.id}`}>
       <div className="card-elegant overflow-hidden group cursor-pointer">
         <div className="aspect-[16/10] bg-gradient-to-br from-[#F0F0FF] to-[#EEF2FF] relative overflow-hidden">
           {activity.coverImage ? (
@@ -215,19 +218,19 @@ function ActivityCard({ activity }: { activity: any }) {
           <h3 className="font-semibold text-gray-900 mb-2 group-hover:text-[#6366F1] transition-colors line-clamp-1">{activity.title}</h3>
           <p className="text-sm text-gray-500 mb-4 line-clamp-2">{activity.description}</p>
           <div className="space-y-2 text-sm text-gray-500">
-            <div className="flex items-center gap-2"><Calendar className="h-4 w-4" /><span>{activity.startTime.toLocaleDateString('zh-CN')}</span></div>
+            <div className="flex items-center gap-2"><Calendar className="h-4 w-4" /><span>{startTime.toLocaleDateString('zh-CN')}</span></div>
             {activity.location && <div className="flex items-center gap-2"><MapPin className="h-4 w-4" /><span className="truncate">{activity.location}</span></div>}
           </div>
           <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
             <div className="flex items-center gap-2">
               <Avatar className="h-7 w-7 border-2 border-[#6366F1]/10">
-                <AvatarFallback className="text-xs bg-[#F0F0FF] text-[#6366F1]">{activity.organizer.name[0]}</AvatarFallback>
+                <AvatarFallback className="text-xs bg-[#F0F0FF] text-[#6366F1]">{activity.organizer?.name?.[0] || "?"}</AvatarFallback>
               </Avatar>
-              <span className="text-xs text-gray-500">{activity.organizer.name}</span>
+              <span className="text-xs text-gray-500">{activity.organizer?.name || "匿名"}</span>
             </div>
             <div className="flex items-center gap-1 text-xs text-gray-500">
               <Users className="h-3.5 w-3.5" />
-              <span>{activity.registrations}/{activity.maxParticipants}</span>
+              <span>{regCount}/{maxP}</span>
             </div>
           </div>
         </div>
